@@ -39,7 +39,6 @@
     </v-app-bar>
 
     <v-content class="px-12">
-      <!-- <HelloWorld/> -->
       <div class="mt-12 px-12 mx-auto" style="width:75%">
           <Stepper />
         </div>
