@@ -39,7 +39,7 @@
     </v-app-bar>
 
     <v-content class="px-12">
-      <div class="mt-12 px-12 mx-auto" style="width:75%">
+      <div class="mt-12 px-12 mx-auto" style="width:1200px">
           <Stepper />
         </div>
     </v-content>

@@ -42,12 +42,28 @@
             <v-expansion-panel-content class="pt-4">
               <div v-html="guide_text[i]"></div>
               <div class="d-flex justify-content-start my-4" >
-                <textarea
-                  v-model="text"
-                  placeholder="Enter something..."
-                  wrap="hard"
-                ></textarea>
+                <form action="/action_page.php">
+                  <textarea
+                    v-model="text"
+                    placeholder="Enter something..."
+                    cols = "80"
+                    rows = "5"
+                    style="resize:none; border:solid 1px #b0bec5"
+                    wrap="hard"
+                  ></textarea>
+                  <input type="Save">
+                </form>
+              
               </div>
+<!-- 
+              <input type="checkbox" id="checkbox" v-model="checked">
+            <label for="checkbox">{{ checked }}</label> -->
+                <label class="checkbox-label">
+                    <input type="checkbox" v-model="test">
+                    <span class="checkbox-custom rectangular"></span>
+                </label>
+                <div class="input-title">Select this substep {{test}}</div>
+
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -65,7 +81,8 @@ export default {
   },
 
   data: () => ({
-    progress : 0,
+     picked: '',
+    progress : 0 ,
     panel_read : [0,0,0,0,0,0],
     panel_expand : [],
     title_text : "1. CONSTITUER UN GROUPE DE TRAVAIL EN RPO ET ÉTABLIR COLLECTIVEMENT DES PROCESSUS DE FONCTIONNEMENT. ",
@@ -112,7 +129,7 @@ export default {
       readItem (n) {
         if(this.panel_read[n]===0){
           this.panel_read[n] = 1;
-          this.progress += 100.0/this.panel_read.length;
+          this.progress = this.progress + 100.0/this.panel_read.length;
           if(this.panel_read.every(this.itemIsRead)){
             this.progress = 100;
           }
@@ -134,3 +151,5 @@ export default {
     },
 };
 </script>
+
+<style scoped src="../css/mycss.css">
