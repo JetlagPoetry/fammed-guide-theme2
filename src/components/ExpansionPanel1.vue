@@ -17,53 +17,48 @@
             {{progress.toFixed(0)}}%
           </div>
         </v-progress-linear>
-        <v-btn color="primary" class="mx-2" @click="collapseAll()">
-            Collapse All
-        </v-btn>  
-        <v-btn color="primary" class="mx-2" @click="expandAll()">
-            Expand All
-        </v-btn>  
 
+          <v-btn color="primary" class="mx-2" @click="clickAllPanel()" style="width:18%;">
+              <v-icon left medium color="#fff" v-if="btn_show_expand">mdi-plus</v-icon>
+              <v-icon left medium v-else>mdi-minus</v-icon>
+              {{btn_text}}
+          </v-btn>
       </div>
       <v-row justify="center">
         <v-expansion-panels inset multiple focusable class="mx-4" v-model="panel_expand">
           <v-expansion-panel
             v-for="(item,i) in 6"
             :key="i"
-            @click="readItem(i)"
-            >
+            @click="readItem(i)">
             <v-expansion-panel-header disable-icon-rotate>
               {{subheader_text[i]}}
               <template v-slot:actions>
-                <v-icon color="teal" v-if="panel_read[i]===1">mdi-check</v-icon>
-                <v-icon color="primary" v-else>mdi-check</v-icon>
+                <v-icon color="primary" v-if="panel_select[i]">mdi-checkbox-marked-circle</v-icon>
+                <v-icon color="#ccc" v-else-if="panel_read[i]">mdi-checkbox-marked-circle</v-icon>
               </template>
             </v-expansion-panel-header>
             <v-expansion-panel-content class="pt-4">
               <div v-html="guide_text[i]"></div>
-              <div class="d-flex justify-content-start my-4" >
-                <form action="/action_page.php">
-                  <textarea
-                    v-model="text"
-                    placeholder="Enter something..."
-                    cols = "80"
-                    rows = "5"
-                    style="resize:none; border:solid 1px #b0bec5"
-                    wrap="hard"
-                  ></textarea>
-                  <input type="Save">
-                </form>
-              
+              <div class="mt-4 mb-0">
+                <textarea
+                  v-model="panel_comment_temp[i]"
+                  placeholder="  Enter something..."
+                  cols = "80"
+                  rows = "5"
+                  style="resize:none; border:solid 1px #b0bec5"
+                  wrap="hard"
+                ></textarea>
+                <v-btn color="primary" class="mx-6 mb-4" @click="saveComment(i)">
+                  Save
+                </v-btn>
               </div>
-<!-- 
-              <input type="checkbox" id="checkbox" v-model="checked">
-            <label for="checkbox">{{ checked }}</label> -->
+              <div class="d-flex justify-content-start my-2" >
                 <label class="checkbox-label">
-                    <input type="checkbox" v-model="test">
+                    <input type="checkbox" v-model="panel_select[i]">
                     <span class="checkbox-custom rectangular"></span>
                 </label>
-                <div class="input-title">Select this substep {{test}}</div>
-
+                <label class="input-title">Select this substep</label>
+              </div>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -81,10 +76,14 @@ export default {
   },
 
   data: () => ({
-     picked: '',
     progress : 0 ,
-    panel_read : [0,0,0,0,0,0],
-    panel_expand : [],
+    panel_read : [false, false, false, false, false, false], //If current step is read.
+    panel_select : [false, false, false, false, false, false], //If current step is selected.
+    panel_expand : [], //If current step is expanded.
+    panel_comment : ["", "", "", "", "", ""],
+    panel_comment_temp : ["", "", "", "", "", ""],
+    btn_text : "Expand All",
+    btn_show_expand : true,
     title_text : "1. CONSTITUER UN GROUPE DE TRAVAIL EN RPO ET ÉTABLIR COLLECTIVEMENT DES PROCESSUS DE FONCTIONNEMENT. ",
     intro_text : "Toute RPO est menée par un groupe de travail composé des représentants de parties prenantes membres universitaires et membres d’organisations de santé. <br /><br />Les parties prenantes organisationnelles qui participent à ce groupe de travail devraient représenter tous les types de parties prenantes de l’organisation de santé, c’est-à-dire les représentants de ceux qui devront mettre en œuvre les changements visés par la RPO et les personnes qui représentent ceux touchés par les changements (et leurs répercussions possibles) devraient tous prendre part aux décisions liées à la recherche avec le ou les universitaires tout au long de la RPO. <br /><br />Des revues de la littérature indiquent que la participation à la prise de décision par les parties prenantes d’organisations de santé peut prendre la forme soit d’une consultation par le ou les universitaires, ou d’une mise en contexte de la RPO en collaboration avec ce ou ces derniers (Bush et al., 2015; Munn-Giddings, McVicar et Smith, 2008). La décision quant à l’ampleur de la participation doit être décidée par le groupe de travail.",
     subheader_text: [
@@ -116,38 +115,41 @@ export default {
     },
 
   methods: {
-      expandAll () {
-        this.panel_expand = [...Array(6).keys()].map((k, i) => i);
-        this.panel_read.fill(1);
-        this.progress = 100;
-      },
-      // Reset the panel
-      collapseAll () {
-        this.panel_expand = [];
+
+      clickAllPanel() {
+        if(this.btn_show_expand){
+          //Click expand all, read all panels
+          this.panel_expand = [...Array(6).keys()].map((k, i) => i);
+          this.panel_read.fill(true);
+          this.progress = 100;
+          this.btn_text = "Collapse All";
+          this.btn_show_expand = false;
+        }else{
+          //Click collapse all, reset all panels
+          this.panel_expand = [];
+          this.btn_text = "Expand All";
+          this.btn_show_expand = true;
+        }
+        
       },
 
       readItem (n) {
-        if(this.panel_read[n]===0){
-          this.panel_read[n] = 1;
+        if(!this.panel_read[n]){
+          this.panel_read[n] = true;
           this.progress = this.progress + 100.0/this.panel_read.length;
           if(this.panel_read.every(this.itemIsRead)){
             this.progress = 100;
           }
         }
-        
-      },
-
-      selectItem (n) {
-        this.panel_read[n] = 2;
-      },
-
-      unselectItem (n){
-        this.panel_read[n] = 1;
       },
 
       itemIsRead (item) {
-        return item>=1;
-      }
+        return item===true;
+      },
+
+      saveComment (n) {
+        this.panel_comment[n] = this.panel_comment_temp[n];
+      },
     },
 };
 </script>

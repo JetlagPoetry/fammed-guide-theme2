@@ -33,16 +33,13 @@
         target="_blank"
         text
       >
-        <span class="mr-2">Latest Release</span>
+        <span class="mr-2">I am the 2nd page</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
 
-
     <v-content class="px-12">
       <div class="mt-12 px-12 mx-auto" style="width:1200px">
-
-    <!-- <router-link to="/page2">Go to Foo</router-link> -->
           <Stepper />
         </div>
     </v-content>
@@ -52,7 +49,7 @@
 <script>
 import Stepper from './components/Stepper';
 export default {
-  name: 'App',
+  name: 'Page2',
 
   components: {
     Stepper,
