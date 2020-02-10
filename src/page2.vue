@@ -1,13 +1,13 @@
 <template>
   <v-app>
-    <v-app-bar
+    <!-- <v-app-bar
       app
       color="primary"
       dark
     >
       <div class="d-flex align-center">
 
-       <!--  <v-img
+        <v-img
           alt="Vuetify Logo"
           class="shrink mr-2"
           contain
@@ -15,7 +15,7 @@
           transition="scale-transition"
           width="40"
         /> -->
-        <v-img
+        <!-- <v-img
           alt="Vuetify Name"
           class="shrink mt-1 hidden-sm-and-down ml-12"
           contain
@@ -36,23 +36,19 @@
         <span class="mr-2">I am the 2nd page</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
-    </v-app-bar>
-
-    <v-content class="px-12">
-      <div class="mt-12 px-12 mx-auto" style="width:1200px">
-          <Stepper />
+    </v-app-bar>  -->
+<div class="mt-12 px-12 mx-auto" style="width:1200px">
+        asdfasdfasdf
+        <router-link to="/query">Go to Foo</router-link>
         </div>
-    </v-content>
   </v-app>
 </template>
 
 <script>
-import Stepper from './components/Stepper';
 export default {
-  name: 'Page2',
+  name: 'page2',
 
   components: {
-    Stepper,
   },
 
   data: () => ({

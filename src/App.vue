@@ -42,7 +42,8 @@
     <v-content class="px-12">
       <div class="mt-12 px-12 mx-auto" style="width:1200px">
 
-    <!-- <router-link to="/page2">Go to Foo</router-link> -->
+    <router-link to="{path:'query'}">Go to Foo</router-link>
+    <router-view></router-view>
           <Stepper />
         </div>
     </v-content>
