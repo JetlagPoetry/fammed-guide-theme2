@@ -1,4 +1,6 @@
 <template>
+  <!-- <v-content class="px-12"> -->
+  <div class="mt-6 px-12 mx-auto" style="width:1200px">
   <v-container>
     <v-stepper v-model="cur_step"
    alt-labels 
@@ -114,6 +116,7 @@
       </v-stepper-items>
     </v-stepper>
   </v-container>
+</div>
 </template>
 
 <script>
