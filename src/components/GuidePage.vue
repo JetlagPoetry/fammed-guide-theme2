@@ -34,7 +34,7 @@
             @click="nextStep(1)"
             class="mx-2"
           >
-            View next
+            Next
           </v-btn>
         </v-stepper-content>
 
@@ -42,18 +42,14 @@
           key="`2-content`"
           :step="2"
         >
-          <v-card
-            class="mb-12"
-            color="grey lighten-1"
-            height="200px"
-          ></v-card>
+          <Panel2 />
 
           <v-btn
             color="primary"
             @click="lastStep(2)"
             class="mx-2"
           >
-            View previous
+            Previous
           </v-btn>
 
           <v-btn
@@ -61,7 +57,7 @@
             @click="nextStep(2)"
             class="mx-2"
           >
-            View next
+            Next
           </v-btn>
         </v-stepper-content>
 
@@ -69,18 +65,14 @@
           key="`3-content`"
           :step="3"
         >
-          <v-card
-            class="mb-12"
-            color="grey lighten-1"
-            height="200px"
-          ></v-card>
+          <Panel3 />
 
           <v-btn
             color="primary"
             @click="lastStep(3)"
             class="mx-2"
           >
-            View previous
+            Previous
           </v-btn>
 
           <v-btn
@@ -88,7 +80,7 @@
             @click="nextStep(3)"
             class="mx-2"
           >
-            View next
+            Next
           </v-btn>
         </v-stepper-content>
 
@@ -96,18 +88,22 @@
           key="`4-content`"
           :step="4"
         >
-          <v-card
-            class="mb-12"
-            color="grey lighten-1"
-            height="200px"
-          ></v-card>
+          <Panel4 />
 
           <v-btn
             color="primary"
             @click="lastStep(4)"
             class="mx-2"
           >
-            View previous
+            Previous
+          </v-btn>
+
+          <v-btn
+            color="primary"
+            @click="lastStep(4)"
+            class="mx-2"
+          >
+            Generate PDF
           </v-btn>
           
         </v-stepper-content>
@@ -121,12 +117,18 @@
 
 <script>
 import Panel1 from './ExpansionPanel1';
+import Panel2 from './ExpansionPanel2';
+import Panel3 from './ExpansionPanel3';
+import Panel4 from './ExpansionPanel4';
 
 export default {
   name: 'Stepper',
 
   components: {
     Panel1,
+    Panel2,
+    Panel3,
+    Panel4
   },
 
   data: () => ({
@@ -161,12 +163,22 @@ export default {
         }
       },
 
-      isStepComplete (n) {
-        if(n==1){
-          n=2;
-        }
-        return Panel1.data.panel_read.every(Panel1.methods.itemIsRead);
-      }
+      isAllStepsRead () {
+        if(!Panel1.data.panel_read.every(this.itemIsRead))
+          return false;
+        if(!Panel2.data.panel_read.every(this.itemIsRead))
+          return false;
+        if(!Panel3.data.panel_read.every(this.itemIsRead))
+          return false;
+        if(!Panel4.data.panel_read.every(this.itemIsRead))
+          return false;
+        return true;
+      },
+
+
+      itemIsRead (item) {
+        return item===true;
+      },
     },
 };
 </script>
