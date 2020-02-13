@@ -15,7 +15,12 @@
           width="160"
           position="center"
         />
-        <v-btn
+        
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
           @click="toHomePage"
           text
         >
@@ -27,10 +32,6 @@
         >
           <span class="mr-2">GUIDE</span>
         </v-btn>
-      </div>
-
-      <v-spacer></v-spacer>
-
     </v-app-bar>
     <v-content>
       <router-view></router-view>

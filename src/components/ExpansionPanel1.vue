@@ -31,22 +31,23 @@
       <v-row justify="center">
         <v-expansion-panels inset multiple focusable class="mx-4" v-model="panel_expand">
           <v-expansion-panel
-            v-for="(item,i) in substep_number"
+            v-for="(item,step_no) in substep_number"
             :key="step_no"
-            @click="readItem(i)">
+            @click="readItem(step_no)"
+            >
             <v-expansion-panel-header disable-icon-rotate>
-              {{subheader_text[i]}}
-              <template v-slot:actions :key="i">
-                <v-icon color="primary" v-if="panel_select[i]">mdi-checkbox-marked-circle</v-icon>
-                <v-icon color="#ccc" v-else-if="panel_read[i]">mdi-checkbox-marked-circle</v-icon>
+              {{subheader_text[step_no]}}
+              <template v-slot:actions>
+                <v-icon color="primary" v-if="panel_select[step_no]">mdi-checkbox-marked-circle</v-icon>
+                <v-icon color="#ccc" v-else-if="panel_read[step_no]">mdi-checkbox-marked-circle</v-icon>
               </template>
             </v-expansion-panel-header>
             <v-expansion-panel-content class="pt-4">
-              <div v-html="guide_text[i]"></div>
+              <div v-html="guide_text[step_no]"></div>
               <v-divider class="my-6"></v-divider>
               <div class="d-flex justify-content-start mb-6" >
                 <label class="checkbox-label">
-                    <input type="checkbox" v-model="panel_select[i]">
+                    <input type="checkbox" v-model="panel_select[step_no]">
                     <span class="checkbox-custom rectangular"></span>
                 </label>
                 <label class="input-title">Select this substep</label>
@@ -57,9 +58,9 @@
                   auto-grow
                   name="input-7-4"
                   label="Customized instructions"
-                  v-model="panel_comment_temp[i]"
+                  v-model="panel_comment_temp[step_no]"
                 ></v-textarea>
-                <v-btn color="primary" class="mb-4" @click="saveComment(i)">
+                <v-btn color="primary" class="mb-4" @click="saveComment(step_no)">
                   Save
                 </v-btn>
               </div>
@@ -73,6 +74,8 @@
 
 <script>
 
+// import Vue from 'vue'
+
 export default {
   name: 'App',
 
@@ -83,15 +86,16 @@ export default {
   data: () => ({
     substep_number : 8,
     progress : 0 ,
-    panel_read : [false, false, false, false, false, false, false, false], //If current step is read.
-    panel_select : [false, false, false, false, false, false, false, false], //If current step is selected.
+    panel_read : [], //If current step is read.
+    panel_select : [], //If current step is selected.
     panel_expand : [], //If current step is expanded.
-    panel_comment : ["", "", "", "", "", "", "", ""],
-    panel_comment_temp : ["", "", "", "", "", "", "", ""],
+    panel_comment : [],
+    panel_comment_temp : [],
     btn_text : "Expand All",
     btn_show_expand : true,
     title_text : "1. CONSTITUER UN GROUPE DE TRAVAIL EN RPO ET ÉTABLIR COLLECTIVEMENT DES PROCESSUS DE FONCTIONNEMENT. ",
     intro_text : "Toute RPO est menée par un groupe de travail composé des représentants de parties prenantes membres universitaires et membres d’organisations de santé.<br /><br /> Les parties prenantes organisationnelles qui participent à ce groupe de travail devraient représenter tous les types de parties prenantes de l’organisation de santé, c’est-à-dire les représentants de ceux qui devront mettre en œuvre les changements visés par la RPO et les personnes qui représentent ceux touchés par les changements (et leurs répercussions possibles) devraient tous prendre part aux décisions liées à la recherche avec le ou les universitaires tout au long de la RPO.<br /><br /> Des revues de la littérature indiquent que la participation à la prise de décision par les parties prenantes d’organisations de santé peut prendre la forme soit d’une consultation par le ou les universitaires, ou d’une mise en contexte de la RPO en collaboration avec ce ou ces derniers (Bush et al., 2015; Munn-Giddings, McVicar et Smith, 2008). La décision quant à l’ampleur de la participation doit être décidée par le groupe de travail.",
+
     subheader_text: [
       "1.1. RECRUTER DES REPRÉSENTANTS DES PARTIES PRENANTES QUI ONT UNE EXPÉRIENCE DE TRAVAIL EN GROUPE. ",
       "1.2. RECRUTER DES MEMBRES DU GROUPE DE TRAVAIL QUI PROVIENNENT DE TOUTES LES PARTIES PRENANTES, DONT LA GESTION.",
@@ -102,6 +106,7 @@ export default {
       "1.7. S’ENTENDRE SUR DES MÉCANISMES DE COMMUNICATIONS.",
       "1.8. ÉTABLIR DES MÉCANISMES ASSURANT LA CONTINUITÉ.",
     ],
+
     guide_text: [
       "Les membres du groupe de travail devraient collaborer de bon gré, être disposés à écouter d’autres personnes et accepter de faire des compromis lorsque cela est pertinent et nécessaire.<br /><br /> Les membres du groupe de travail exprimant des opinions divergentes ou qui contestent les objectifs et les processus de la RPO peuvent contribuer de manière pertinente et appropriée.",
 
@@ -124,7 +129,16 @@ export default {
   }),
 
   watch: {
-    },
+  },
+
+  mounted:function(){
+    //Initialize arrays
+    this.panel_read = new Array(this.substep_number).fill(false);
+    this.panel_select = new Array(this.substep_number).fill(false);
+    this.panel_expand = new Array(this.substep_number).fill(false);
+    this.panel_comment = new Array(this.substep_number).fill("");
+    this.panel_comment_temp = new Array(this.substep_number).fill("");
+  },
 
   methods: {
 
@@ -146,8 +160,9 @@ export default {
       },
 
       selectAllPanel() {
-        this.panel_read.fill(true);
-        this.panel_select.fill(true);
+        this.panel_read = new Array(this.substep_number).fill(true);
+        this.panel_select = new Array(this.substep_number).fill(true);
+        this.progress = 100;
       },
 
       readItem (n) {
@@ -166,10 +181,6 @@ export default {
 
       saveComment (n) {
         this.panel_comment[n] = this.panel_comment_temp[n];
-      },
-
-      forceRerender(){
-        this.step_no += 1;
       },
     },
 };

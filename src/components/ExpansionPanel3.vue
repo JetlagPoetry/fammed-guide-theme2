@@ -18,31 +18,36 @@
           </div>
         </v-progress-linear>
 
-          <v-btn color="primary" class="mx-2" @click="clickAllPanel()" style="width:18%;">
+          <v-btn color="primary" class="mx-2" @click="clickAllPanel()" style="width:16%;">
               <v-icon left medium color="#fff" v-if="btn_show_expand">mdi-plus</v-icon>
               <v-icon left medium v-else>mdi-minus</v-icon>
               {{btn_text}}
+          </v-btn>
+
+          <v-btn color="primary" class="mx-2" @click="selectAllPanel()">
+              SELECT ALL
           </v-btn>
       </div>
       <v-row justify="center">
         <v-expansion-panels inset multiple focusable class="mx-4" v-model="panel_expand">
           <v-expansion-panel
-            v-for="(item,i) in substep_number"
-            :key="i"
-            @click="readItem(i)">
+            v-for="(item,step_no) in substep_number"
+            :key="step_no"
+            @click="readItem(step_no)"
+            >
             <v-expansion-panel-header disable-icon-rotate>
-              {{subheader_text[i]}}
+              {{subheader_text[step_no]}}
               <template v-slot:actions>
-                <v-icon color="primary" v-if="panel_select[i]">mdi-checkbox-marked-circle</v-icon>
-                <v-icon color="#ccc" v-else-if="panel_read[i]">mdi-checkbox-marked-circle</v-icon>
+                <v-icon color="primary" v-if="panel_select[step_no]">mdi-checkbox-marked-circle</v-icon>
+                <v-icon color="#ccc" v-else-if="panel_read[step_no]">mdi-checkbox-marked-circle</v-icon>
               </template>
             </v-expansion-panel-header>
             <v-expansion-panel-content class="pt-4">
-              <div v-html="guide_text[i]"></div>
+              <div v-html="guide_text[step_no]"></div>
               <v-divider class="my-6"></v-divider>
               <div class="d-flex justify-content-start mb-6" >
                 <label class="checkbox-label">
-                    <input type="checkbox" v-model="panel_select[i]">
+                    <input type="checkbox" v-model="panel_select[step_no]">
                     <span class="checkbox-custom rectangular"></span>
                 </label>
                 <label class="input-title">Select this substep</label>
@@ -53,9 +58,9 @@
                   auto-grow
                   name="input-7-4"
                   label="Customized instructions"
-                  v-model="panel_comment_temp[i]"
+                  v-model="panel_comment_temp[step_no]"
                 ></v-textarea>
-                <v-btn color="primary" class="mb-4" @click="saveComment(i)">
+                <v-btn color="primary" class="mb-4" @click="saveComment(step_no)">
                   Save
                 </v-btn>
               </div>
@@ -69,6 +74,8 @@
 
 <script>
 
+// import Vue from 'vue'
+
 export default {
   name: 'App',
 
@@ -79,11 +86,11 @@ export default {
   data: () => ({
     substep_number : 4,
     progress : 0 ,
-    panel_read : [false, false, false, false], //If current step is read.
-    panel_select : [false, false, false, false], //If current step is selected.
+    panel_read : [], //If current step is read.
+    panel_select : [], //If current step is selected.
     panel_expand : [], //If current step is expanded.
-    panel_comment : ["", "", "", ""],
-    panel_comment_temp : ["", "", "" ,""],
+    panel_comment : [],
+    panel_comment_temp : [],
     btn_text : "Expand All",
     btn_show_expand : true,
     title_text : "3. ADAPTER LES PROCESSUS DE LA RPO AUX BESOINS DES MEMBRES DU GROUPE DE TRAVAIL.",
@@ -104,11 +111,19 @@ export default {
       "Il n’est pas nécessaire que les tous les membres du groupe de travail disposent de compétences en recherche, mais la capacité d’analyser et de synthétiser des idées constitue un atout.<br /><br /> Bien que les compétences en recherche ne soient pas une condition préalable à la participation, un niveau minimal de littératie en recherche est important pour participer pleinement à un projet en RPO.<br /><br /> Il pourrait être pertinent de soutenir l’amélioration des compétences chez tous les membres du groupe de travail en termes de recherche et de contexte du projet.<br /><br /> Cela peut prendre la forme d’une formation en littératie en recherche et en RPO qui est offerte à tous les membres du groupe de travail afin de s’assurer qu’ils comprennent bien les concepts clés, les processus et les méthodes à l’égard de la recherche en général (p. ex., les notions de base en épidémiologie, en statistiques et en méthodes qualitatives), les considérations éthiques, les mécanismes de publication de même que les critères de promotion en milieu universitaire. Les universitaires doivent apprendre l’importance de travailler avec des gens qui ne sont pas affiliés à une université et aussi la façon de participer avec respect et de façon significative avec tous les membres du groupe de travail."
       ]
 
-
   }),
 
   watch: {
-    },
+  },
+
+  mounted:function(){
+    //Initialize arrays
+    this.panel_read = new Array(this.substep_number).fill(false);
+    this.panel_select = new Array(this.substep_number).fill(false);
+    this.panel_expand = new Array(this.substep_number).fill(false);
+    this.panel_comment = new Array(this.substep_number).fill("");
+    this.panel_comment_temp = new Array(this.substep_number).fill("");
+  },
 
   methods: {
 
@@ -127,6 +142,12 @@ export default {
           this.btn_show_expand = true;
         }
         
+      },
+
+      selectAllPanel() {
+        this.panel_read = new Array(this.substep_number).fill(true);
+        this.panel_select = new Array(this.substep_number).fill(true);
+        this.progress = 100;
       },
 
       readItem (n) {

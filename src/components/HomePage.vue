@@ -1,8 +1,7 @@
 <template>
   <v-container fluid style="padding:0; margin:0">
     <v-parallax 
-      style="background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); height: 90vh"
-      >
+      style="background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); height: 90vh">
           <v-row
             align="center"
             justify="center"

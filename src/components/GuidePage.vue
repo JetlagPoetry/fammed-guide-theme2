@@ -1,6 +1,6 @@
 <template>
   <!-- <v-content class="px-12"> -->
-  <div class="mt-6 px-12 mx-auto" style="width:1200px">
+  <div class="mt-6 px-12 mx-auto" style="width:95vw">
   <v-container>
     <v-stepper v-model="cur_step"
    alt-labels 
@@ -100,7 +100,7 @@
 
           <v-btn
             color="primary"
-            @click="lastStep(4)"
+            @click="toSummary()"
             class="mx-2"
           >
             Generate PDF
@@ -147,6 +147,11 @@ export default {
     },
 
   methods: {
+    toSummary () {
+        this.$router.push('/summary');
+      },
+
+
       nextStep (n) {
         if (n === this.steps) {
           this.cur_step = 1
@@ -164,13 +169,13 @@ export default {
       },
 
       isAllStepsRead () {
-        if(!Panel1.data.panel_read.every(this.itemIsRead))
+        if(!Panel1.data.progress===100)
           return false;
-        if(!Panel2.data.panel_read.every(this.itemIsRead))
+        if(!Panel2.data.progress===100)
           return false;
-        if(!Panel3.data.panel_read.every(this.itemIsRead))
+        if(!Panel3.data.progress===100)
           return false;
-        if(!Panel4.data.panel_read.every(this.itemIsRead))
+        if(!Panel4.data.progress===100)
           return false;
         return true;
       },
