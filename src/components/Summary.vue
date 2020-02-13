@@ -15,12 +15,14 @@ export default {
   name: 'Summary',
 
   components: {
-
   },
 
   data: () => ({
-  
   }),
+
+  mounted:function(){
+    
+  },
 
   watch: {
     },

@@ -171,4 +171,4 @@ export default {
 };
 </script>
 
-<style scoped src="../css/mycss.css">
+<style scoped src="../css/mycss.css"/>
