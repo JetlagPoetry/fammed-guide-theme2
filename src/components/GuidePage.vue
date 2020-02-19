@@ -27,7 +27,7 @@
           key="`1-content`"
           :step="1"
         >
-          <Panel1 />
+          <Panel1 ref="panel1"/>
 
           <v-btn
             color="primary"
@@ -132,11 +132,12 @@ export default {
   },
 
   data: () => ({
-        cur_step: 1,
-        steps: 4,
-        progress : 90
-  
+    cur_step: 1,
+    steps: 4,
+    // progress : 90,
   }),
+  props:{
+  },
 
   watch: {
       steps (val) {
@@ -148,7 +149,25 @@ export default {
 
   methods: {
     toSummary () {
-        this.$router.push('/summary');
+        let panel1 = {
+          'id': '1',
+          'name': this.$refs.panel1.title_text,
+          'children':[],
+        };
+        var i;
+        for(i=0; i<this.$refs.panel1.substep_number; i++){
+          panel1.children.push({
+            'id': (i+2).toString(), 
+            'name': this.$refs.panel1.subheader_text[i], 
+            'title': this.$refs.panel1.panel_comment[i],
+            'selected': this.$refs.panel1.panel_select[i]
+          })
+        }
+
+        this.$router.push({
+          name:'summary', 
+          params:{ 
+            data: panel1}});
       },
 
 
@@ -168,17 +187,17 @@ export default {
         }
       },
 
-      isAllStepsRead () {
-        if(!Panel1.data.progress===100)
-          return false;
-        if(!Panel2.data.progress===100)
-          return false;
-        if(!Panel3.data.progress===100)
-          return false;
-        if(!Panel4.data.progress===100)
-          return false;
-        return true;
-      },
+      // isAllStepsRead () {
+      //   if(!Panel1.data.progress===100)
+      //     return false;
+      //   if(!Panel2.data.progress===100)
+      //     return false;
+      //   if(!Panel3.data.progress===100)
+      //     return false;
+      //   if(!Panel4.data.progress===100)
+      //     return false;
+      //   return true;
+      // },
 
 
       itemIsRead (item) {

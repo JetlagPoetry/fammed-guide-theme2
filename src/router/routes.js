@@ -4,9 +4,9 @@ import guide_page from '../components/GuidePage.vue';
 import summary_page from '../components/Summary.vue';
 
 const routes = [
-    { path: '/', component: home_page },
-    { path: '/guide', component: guide_page },
-    { path: '/summary', component: summary_page },
+    { name: 'home', path: '/', component: home_page },
+    { name: 'guide', path: '/guide', component: guide_page },
+    { name: 'summary', path: '/summary', component: summary_page },
 ];
 
 export default routes;
