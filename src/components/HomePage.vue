@@ -18,6 +18,7 @@
             <v-btn outlined x-large color="#fff" @click="toGuidePage">
               Customize<v-icon right>mdi-arrow-right</v-icon> 
             </v-btn>
+            
           </v-col>
         </v-row>
     </v-parallax>
