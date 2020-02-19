@@ -15,7 +15,7 @@
       class="orgchart-container"
     >
     <div
-      class="orgchart l2r"
+      class="orgchart"
     >
       <organization-chart-node :datasource="datasource">
         <template v-for="slot in Object.keys($scopedSlots)" :slot="slot" slot-scope="scope">
@@ -220,15 +220,17 @@ export default {
 }
 /* node styling */
 .orgchart .node {
-  box-sizing: border-box;
-  display: inline-block;
+  /*box-sizing: border-box;*/
+/*  display: inline-block;
   position: relative;
   margin: 0;
   padding: 3px;
   border: 2px dashed transparent;
   text-align: center;
-  width: 130px;
+  width: 300;
+  height: 100;*/
 }
+
 .orgchart.l2r .node,
 .orgchart.r2l .node {
   width: 50px;
@@ -263,35 +265,36 @@ export default {
 .orgchart .node.allowedDrop {
   border-color: rgba(68, 157, 68, 0.9);
 }
-.orgchart .node .title {
+.orgchart .node .subheader {
   text-align: center;
   font-size: 12px;
   font-weight: bold;
   height: 20px;
   line-height: 20px;
-  overflow: hidden;
+  /*overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap;*/
   /*background-color: rgba(217, 83, 79, 0.8);*/
   color: #333;
   border-radius: 2px 2px 0 0;
   border: solid 1px #777;
+  width:300;
 }
-.orgchart.b2t .node .title {
+.orgchart.b2t .node .subheader {
   transform: rotate(-180deg);
   transform-origin: center bottom;
 }
-.orgchart.l2r .node .title {
-  transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
+.orgchart.l2r .node .subheader {
+  transform: rotate(-90deg) translate(-120px, -120px) rotateY(180deg);
   transform-origin: bottom center;
-  width: 120px;
+  width: 300px;
 }
-.orgchart.r2l .node .title {
+.orgchart.r2l .node .subheader {
   transform: rotate(-90deg) translate(-40px, -40px);
   transform-origin: bottom center;
   width: 120px;
 }
-.orgchart .node .title .symbol {
+.orgchart .node .subheader .symbol {
   float: left;
   margin-top: 4px;
   margin-left: 2px;
@@ -307,18 +310,19 @@ export default {
   text-align: center;
   background-color: yellow;
   color: #333;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /*overflow: hidden;
+  text-overflow: ellipsis;*/
   /*white-space: nowrap;*/
+  width:300;
 }
 .orgchart.b2t .node .content {
   transform: rotate(180deg);
   transform-origin: center top;
 }
 .orgchart.l2r .node .content {
-  transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
+  transform: rotate(-90deg) translate(-120px, -120px) rotateY(180deg);
   transform-origin: top center;
-  width: 120px;
+  width: 300px;
 }
 .orgchart.r2l .node .content {
   transform: rotate(-90deg) translate(-40px, -40px);
@@ -468,11 +472,9 @@ export default {
 .orgchart.r2l .node.slide-left {
   transform: translateX(-40px);
 }
-
 .node.unselected{
   border: green 2px solid;
 }
-
 .node.unselected .content{
   color:blue;
 }

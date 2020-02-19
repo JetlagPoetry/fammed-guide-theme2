@@ -5,7 +5,7 @@
        <td :colspan="datasource.children && datasource.children.length ? datasource.children.length*2 : null">
         <div v-if="datasource.selected" class="node" :id="datasource.id" ><!--@click.stop="handleClick(datasource)"-->
           <slot :node-data="datasource">
-            <div class="title">
+            <div class="subheader">
               <i class="fa fa-users symbol"></i>
               {{ datasource.name }}
             </div>
@@ -14,8 +14,7 @@
         </div>
         <div v-else class="node unselected" :id="datasource.id" ><!--@click.stop="handleClick(datasource)"-->
           <slot :node-data="datasource">
-            <div class="title">
-              <i class="fa fa-users symbol"></i>
+            <div class="subheader">
               {{ datasource.name }}
             </div>
             <div class="content">{{ datasource.title }}</div>
