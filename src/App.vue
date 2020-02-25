@@ -24,13 +24,19 @@
           @click="toHomePage"
           text
         >
-          <span class="mr-2">HOME</span>
+          <span class="mr-2">{{$t('nav.btn_home')}}</span>
         </v-btn>
         <v-btn
           @click="toGuidePage"
           text
         >
-          <span class="mr-2">GUIDE</span>
+          <span class="mr-2">{{$t('nav.btn_guide')}}</span>
+        </v-btn>
+        <v-btn
+          @click="changeLanguage"
+          text
+        >
+          <span class="mr-2">{{$t('nav.btn_lang')}}</span>
         </v-btn>
     </v-app-bar>
     <v-content>
@@ -64,6 +70,13 @@ export default {
         this.$router.push('/guide');
       },
 
+      changeLanguage(){
+        if(this.$i18n.locale==='fr'){
+          this.$i18n.locale='en';
+        }else{
+          this.$i18n.locale='fr';
+        }
+      }
     },
 };
 </script>
