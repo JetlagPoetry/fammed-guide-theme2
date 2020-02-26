@@ -6,17 +6,19 @@
    alt-labels 
    non-linear>
     <v-stepper-header>
-      <v-stepper-step step="1" editable><div style="width:240px; font-size:small">{{$t('guide.text_step[0]')}}</div></v-stepper-step>
+      <v-stepper-step step="1" editable><div style="width:240px; font-size:small">CONSTITUER UN GROUPE DE TRAVAIL EN RPO ET ÉTABLIR COLLECTIVEMENT DES PROCESSUS DE FONCTIONNEMENT. </div></v-stepper-step>
 
-      <v-stepper-step step="2" editable><div style="width:240px; font-size:small">{{$t('guide.text_step[1]')}}</div></v-stepper-step>
+      <v-divider style="width:100px"></v-divider>
 
-      <v-divider></v-divider>
-
-      <v-stepper-step step="3" editable><div style="width:240px; font-size:small">{{$t('guide.text_step[2]')}}</div></v-stepper-step>
+      <v-stepper-step step="2" editable><div style="width:240px; font-size:small">FORMULER COLLECTIVEMENT LES OBJECTIFS, ANALYSER LES DONNÉES ET DÉTERMINER L’UTILISATION DES RÉSULTATS OBTENUS LORS D’UNE RPO.</div></v-stepper-step>
 
       <v-divider></v-divider>
 
-      <v-stepper-step step="4" editable><div style="width:240px; font-size:small">{{$t('guide.text_step[3]')}}</div></v-stepper-step>
+      <v-stepper-step step="3" editable><div style="width:240px; font-size:small">ADAPTER LES PROCESSUS DE LA RPO AUX BESOINS DES MEMBRES DU GROUPE DE TRAVAIL</div></v-stepper-step>
+
+      <v-divider></v-divider>
+
+      <v-stepper-step step="4" editable><div style="width:240px; font-size:small">VEILLER COLLECTIVEMENT À L’ÉTABLISSEMENT ET À L’ENTRETIEN DES RELATIONS AU SEIN DU GROUPE DE TRAVAIL.</div></v-stepper-step>
 
     </v-stepper-header>
 
@@ -32,7 +34,7 @@
             @click="nextStep(1)"
             class="mx-2"
           >
-            {{$t('guide.btn_next')}}
+            Next
           </v-btn>
         </v-stepper-content>
 
@@ -47,7 +49,7 @@
             @click="lastStep(2)"
             class="mx-2"
           >
-            {{$t('guide.btn_previous')}}
+            Previous
           </v-btn>
 
           <v-btn
@@ -55,7 +57,7 @@
             @click="nextStep(2)"
             class="mx-2"
           >
-            {{$t('guide.btn_next')}}
+            Next
           </v-btn>
         </v-stepper-content>
 
@@ -70,7 +72,7 @@
             @click="lastStep(3)"
             class="mx-2"
           >
-            {{$t('guide.btn_previous')}}
+            Previous
           </v-btn>
 
           <v-btn
@@ -78,7 +80,7 @@
             @click="nextStep(3)"
             class="mx-2"
           >
-            {{$t('guide.btn_next')}}
+            Next
           </v-btn>
         </v-stepper-content>
 
@@ -93,7 +95,7 @@
             @click="lastStep(4)"
             class="mx-2"
           >
-            {{$t('guide.btn_previous')}}
+            Previous
           </v-btn>
 
           <v-btn
@@ -101,7 +103,7 @@
             @click="toSummary()"
             class="mx-2"
           >
-            {{$t('guide.btn_export')}}
+            Generate PDF
           </v-btn>
           
         </v-stepper-content>
