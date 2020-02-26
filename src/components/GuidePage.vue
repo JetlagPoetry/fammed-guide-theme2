@@ -147,19 +147,17 @@ export default {
 
   methods: {
     toSummary () {
-        let panel1 = {
-          'id': '1',
-          'name': this.$refs.panel1.title_text,
-          'children':[],
-        };
+        let panel1 = [];
+        panel1.push({key: 0, substep : this.$refs.panel1.title_text});
         var i;
-        for(i=0; i<this.$refs.panel1.substep_number; i++){
-          panel1.children.push({
-            'id': (i+2).toString(), 
-            'name': this.$refs.panel1.subheader_text[i], 
-            'title': this.$refs.panel1.panel_comment[i],
-            'selected': this.$refs.panel1.panel_select[i]
-          })
+        for(i=0; i< this.$refs.panel1.substep_number; i++){
+          panel1.data.push({
+            key: i+1,
+            substep: this.$refs.panel1.subheader_text[i], 
+            comment: this.$refs.panel1.panel_comment[i],
+            selected: this.$refs.panel1.panel_select[i],
+            parent: 1
+          });
         }
 
         this.$router.push({
