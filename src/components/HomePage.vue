@@ -7,10 +7,16 @@
             justify="center"
           >
           <v-col class="text-center pb-12" cols="12">
-            <h1 class="mb-8" style="font-size: 38px;">{{$t('home.text_title')}}</h1>
-            <div v-html="$t('home.text_desc')"></div>
+            <h1 class="mb-8" style="font-size: 38px;">Guide sur la recherche participative organisationnelle (RPO)</h1>
+            <p>
+              <span class="subheading">Disponible en français et en anglais,  ce guide fournit des recommandations pour aider toutes les parties prenantes </span>
+              <br/>
+              <span class="subheading">(chercheurs, cliniciens, gestionnaires et patients partenaires) à mettre en œuvre un projet de recherche participative</span>
+              <br/>
+              <span class="subheading"> qui vise à améliorer les pratiques dans une (ou des) organisation(s) de santé.</span>
+            </p>
             <v-btn outlined x-large color="#fff" @click="toGuidePage">
-              {{$t('home.btn_customize')}}<v-icon right>mdi-arrow-right</v-icon> 
+              Customize<v-icon right>mdi-arrow-right</v-icon> 
             </v-btn>
             
           </v-col>
