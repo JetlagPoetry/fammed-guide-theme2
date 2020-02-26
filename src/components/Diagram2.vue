@@ -41,7 +41,7 @@ export default {
               $(go.TreeLayout,  // use a TreeLayout to position all of the nodes
                 {
                   // isOngoing: false,  // don't relayout when expanding/collapsing panels
-                  // treeStyle: go.TreeLayout.StyleRootOnly,
+                  // treeStyle: go.TreeLayout.StyleLastParents,
                   // // properties for most of the tree:
                   // angle: 0,
                   // layerSpacing: 80,
@@ -51,7 +51,7 @@ export default {
                   // // alternateAlignment: go.TreeLayout.AlignmentTopLeftBus,
                   // alternateNodeIndent: 15,
                   // alternateNodeIndentPastParent: 1,
-                  // alternateNodeSpacing: 15,
+                  // alternateNodeSpacing: 50,
                   // alternateLayerSpacing: 40,
                   // alternateLayerSpacingParentOverlap: 1,
                   // alternatePortSpot: new go.Spot(0.001, 1, 20, 0),
@@ -118,11 +118,9 @@ export default {
                   new go.Binding("text", "comment"),
                   new go.Binding("visible", "comment", function(comment) { return comment!==""&&comment!==undefined;}),
                 ),
-                // $("PanelExpanderButton", "INFO",
-                //   { row: 0, column: 1, rowSpan: 2, margin: this.ml8 }
-                // )
               ),
         );
+
     myDiagram.linkTemplate =
         $(go.Link, go.Link.Orthogonal,
           { corner: 5, selectable: false },
@@ -140,27 +138,11 @@ export default {
     // modelData: function(val) { this.updateModel(val); }
   },
   methods: {
-    model: function() { return this.diagram.model; },
-    textStyle(field) {
-      return [
-        {
-          font: "12px Roboto, sans-serif", stroke: "rgba(0, 0, 0, .60)",
-          visible: false  // only show textblocks when there is corresponding data for them
-        },
-        new go.Binding("visible", field, function(val) { return val !== undefined; })
-      ];
-    },
-      // define Converters to be used for Bindings
-    theNationFlagConverter(nation) {
-      return "https://www.nwoods.com/images/emojiflags/" + nation + ".png";
-    }
+    model: function() { return this.diagram.model; }
   }
 }
 </script>
 
 <style scoped>
-.lean {
-  height: 100%;
-  width: 100%;
-}
+
 </style>

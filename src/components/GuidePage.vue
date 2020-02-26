@@ -1,8 +1,9 @@
 <template>
   <!-- <v-content class="px-12"> -->
-  <div class="mt-6 px-12 mx-auto" style="width:95vw">
+  <div class="mt-6 px-12 mx-auto" style="width:95%; max-width:1400px" >
   <v-container>
-    <v-stepper v-model="cur_step"
+    <v-stepper 
+    v-model="cur_step"
    alt-labels 
    non-linear>
     <v-stepper-header>
@@ -42,7 +43,7 @@
           key="`2-content`"
           :step="2"
         >
-          <Panel2 />
+          <Panel2 ref="panel2"/>
 
           <v-btn
             color="primary"
@@ -65,7 +66,7 @@
           key="`3-content`"
           :step="3"
         >
-          <Panel3 />
+          <Panel3 ref="panel3"/>
 
           <v-btn
             color="primary"
@@ -88,7 +89,7 @@
           key="`4-content`"
           :step="4"
         >
-          <Panel4 />
+          <Panel4 ref="panel4"/>
 
           <v-btn
             color="primary"
@@ -149,23 +150,46 @@ export default {
 
   methods: {
     toSummary () {
-        let panel1 = [];
-        // panel1.push({"key": 0, "substep" : this.$refs.panel1.title_text});
-        // var i;
-        // for(i=0; i< this.$refs.panel1.substep_number; i++){
-        //   panel1.push({
-        //     "key": i+1,
-        //     "substep": this.$refs.panel1.subheader_text[i], 
-        //     "comment": this.$refs.panel1.panel_comment[i],
-        //     "selected": this.$refs.panel1.panel_select[i],
-        //     "parent": 1
-        //   });
-        // }
+        var data = [];
+        var i;
+        var key=0;
+        for(i=0; i<4; i++){
 
+          var panel;
+          switch(i){
+            case 0:
+              panel = this.$refs.panel1;
+              break;
+            case 1:
+              panel = this.$refs.panel2;
+              break;            
+            case 2:
+              panel = this.$refs.panel3;
+              break;
+            case 3:
+              panel = this.$refs.panel4;
+              break;
+          }
+          var parent = key;
+          data.push({"key":key++, "substep":this.$t('guide.text_content['+i+'].title_text'), "comment":"" });
+
+          var j;
+          for(j=0; j< panel.substep_number; j++){
+            data.push({
+              "key": key++,
+              "substep": this.$t('guide.text_content['+i+'].subheader_text['+j+']'), 
+              "comment": panel.panel_comment[j],
+              "selected": panel.panel_select[j],
+              "parent": parent
+            });
+            
+          }
+        }
+      
         this.$router.push({
           name:'summary', 
           params:{ 
-            data: panel1}});
+            data: data}});
       },
 
 
@@ -184,18 +208,6 @@ export default {
           this.cur_step = n - 1
         }
       },
-
-      // isAllStepsRead () {
-      //   if(!Panel1.data.progress===100)
-      //     return false;
-      //   if(!Panel2.data.progress===100)
-      //     return false;
-      //   if(!Panel3.data.progress===100)
-      //     return false;
-      //   if(!Panel4.data.progress===100)
-      //     return false;
-      //   return true;
-      // },
 
 
       itemIsRead (item) {
