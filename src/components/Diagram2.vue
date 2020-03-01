@@ -25,37 +25,15 @@ export default {
       spot1: go.Spot.TopLeft, spot2: go.Spot.BottomRight  // make content go all the way to inside edges of rounded corners
     };
     var myDiagram = $(go.Diagram, this.$el,  // the DIV HTML element
-      
 
           {
             // Put the diagram contents at the top center of the viewport
             initialDocumentSpot: go.Spot.LeftCenter,
             initialViewportSpot: go.Spot.LeftCenter,
             hasVerticalScrollbar:false,
-            // OR: Scroll to show a particular node, once the layout has determined where that node is
-            // "InitialLayoutCompleted": function(e) {
-            //  var node = e.diagram.findNodeForKey(28);
-            //  if (node !== null) e.diagram.commandHandler.scrollToPart(node);
-            // },
             layout:
               $(go.TreeLayout,  // use a TreeLayout to position all of the nodes
                 {
-                  // isOngoing: false,  // don't relayout when expanding/collapsing panels
-                  // treeStyle: go.TreeLayout.StyleLastParents,
-                  // // properties for most of the tree:
-                  // angle: 0,
-                  // layerSpacing: 80,
-                  // alignment: go.TreeLayout.AlignmentStart,
-                  // // properties for the "last parents":
-                  // alternateAngle: 0,
-                  // // alternateAlignment: go.TreeLayout.AlignmentTopLeftBus,
-                  // alternateNodeIndent: 15,
-                  // alternateNodeIndentPastParent: 1,
-                  // alternateNodeSpacing: 50,
-                  // alternateLayerSpacing: 40,
-                  // alternateLayerSpacingParentOverlap: 1,
-                  // alternatePortSpot: new go.Spot(0.001, 1, 20, 0),
-                  // alternateChildPortSpot: go.Spot.Left
                   angle: 0,
                   alignment: go.TreeLayout.AlignmentStart,
                   nodeIndent: 40,
@@ -88,43 +66,53 @@ export default {
             new go.Binding("fill", "isHighlighted", function(h) { return h ? "#e8eaf6" : "#ffffff"; }).ofObject()
           ),
           $(go.Panel, "Vertical",
-            { maxSize: new go.Size(500, NaN), },
-                $(go.TextBlock,
-                  {
-                    font: "16px Roboto, sans-serif",
-                    stroke: "rgba(0, 0, 0, .87)",
-                    maxSize: new go.Size(500, NaN),
-                    margin: 12
-                  },
-                  new go.Binding("text", "substep")
-                ),
-                $(go.Shape, "LineH",
-                  {
-                    stroke: "rgba(0, 0, 0, .60)", strokeWidth: 1,
-                    height: 1, stretch: go.GraphObject.Horizontal
-                  },
-                  new go.Binding("visible", "comment", function(comment) { return comment!==""&&comment!==undefined;})
-                ),
-                $(go.TextBlock, 
-                {
-                    font: "12px Roboto, sans-serif",
-                    stroke: "rgba(0, 0, 0, .87)",
-                    maxSize: new go.Size(160, NaN),
-                    width: 300,
-                  },
-                  {
-                    maxSize: new go.Size(160, NaN)
-                  },
-                  new go.Binding("text", "comment"),
-                  new go.Binding("visible", "comment", function(comment) { return comment!==""&&comment!==undefined;}),
-                ),
+            { maxSize: new go.Size(600, NaN), },
+
+            $(go.Panel, "Horizontal",
+              { maxSize: new go.Size(600, NaN), },
+              $(go.Picture, 
+                { source: "selected.png", width: 30, height: 30, margin: 4},
+                new go.Binding("visible", "", function(data){ return data.selected&&!data.isParent;})
               ),
+              $(go.TextBlock,
+                {
+                  font: "16px Roboto, sans-serif",
+                  margin: 12,
+                  wrap: go.TextBlock.WrapFit,
+                  isMultiline: true,
+                },
+                new go.Binding("text", "substep"),
+                new go.Binding("stroke", "selected", function(selected){ return selected ? "#424242":"#D3D3D3"})
+              )
+            ),
+            $(go.Shape, "LineH",
+              {
+                stroke: "rgba(0, 0, 0, .60)", strokeWidth: 1,
+                height: 1, stretch: go.GraphObject.Horizontal
+              },
+              new go.Binding("visible", "", function(data) { return data.comment!=""&&!data.isParent})
+            ),
+            $(go.TextBlock, 
+            {
+                font: "12px Roboto, sans-serif",
+                stroke: "rgba(0, 0, 0, .87)",
+                maxSize: new go.Size(160, NaN),
+                width: 300,
+              },
+              {
+                maxSize: new go.Size(160, NaN)
+              },
+              new go.Binding("text", "comment"),
+              new go.Binding("visible", "comment", function(comment) { return comment!==""&&comment!==undefined;}),
+            ),
+          ),
         );
 
     myDiagram.linkTemplate =
         $(go.Link, go.Link.Orthogonal,
           { corner: 5, selectable: false },
-          $(go.Shape, { strokeWidth: 3, stroke: "#424242" }));  // dark gray, rounded corner links
+          $(go.Shape, { strokeWidth: 3, stroke: "#424242" }),
+          );  // dark gray, rounded corner links
     myDiagram.model =
       $(go.TreeModel,
         {

@@ -171,7 +171,7 @@ export default {
               break;
           }
           var parent = key;
-          data.push({"key":key++, "substep":this.$t('guide.text_content['+i+'].title_text'), "comment":"" });
+          data.push({"key":key++, "substep":this.$t('guide.text_content['+i+'].title_text'), "isParent": true });
 
           var j;
           for(j=0; j< panel.substep_number; j++){
@@ -180,7 +180,8 @@ export default {
               "substep": this.$t('guide.text_content['+i+'].subheader_text['+j+']'), 
               "comment": panel.panel_comment[j],
               "selected": panel.panel_select[j],
-              "parent": parent
+              "parent": parent,
+              "isParent": false,
             });
             
           }
