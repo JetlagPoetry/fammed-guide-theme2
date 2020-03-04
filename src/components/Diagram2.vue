@@ -36,9 +36,9 @@ export default {
                 {
                   angle: 0,
                   alignment: go.TreeLayout.AlignmentStart,
-                  nodeIndent: 40,
+                  nodeIndent: 25,
                   nodeIndentPastParent: 1,
-                  nodeSpacing: 30,
+                  nodeSpacing: 20,
                   layerSpacing: 80,
                   layerSpacingParentOverlap: 1,
                   portSpot: new go.Spot(0.001, 1, 20, 0),
@@ -66,20 +66,20 @@ export default {
             new go.Binding("fill", "isHighlighted", function(h) { return h ? "#e8eaf6" : "#ffffff"; }).ofObject()
           ),
           $(go.Panel, "Vertical",
-            { maxSize: new go.Size(600, NaN), },
+            { maxSize: new go.Size(600, Infinity), },
 
             $(go.Panel, "Horizontal",
-              { maxSize: new go.Size(600, NaN), },
+              { maxSize: new go.Size(600, Infinity), padding: 12},
               $(go.Picture, 
-                { source: "selected.png", width: 30, height: 30, margin: 4},
+                { source: "selected.png", width: 20, height: 20},
                 new go.Binding("visible", "", function(data){ return data.selected&&!data.isParent;})
               ),
               $(go.TextBlock,
                 {
-                  font: "16px Roboto, sans-serif",
-                  margin: 12,
+                  font: "12px Roboto, sans-serif",
                   wrap: go.TextBlock.WrapFit,
                   isMultiline: true,
+                  maxSize: new go.Size(550, Infinity)
                 },
                 new go.Binding("text", "substep"),
                 new go.Binding("stroke", "selected", function(selected){ return selected ? "#424242":"#D3D3D3"})
@@ -96,11 +96,11 @@ export default {
             {
                 font: "12px Roboto, sans-serif",
                 stroke: "rgba(0, 0, 0, .87)",
-                maxSize: new go.Size(160, NaN),
+                maxSize: new go.Size(160, Infinity),
                 width: 300,
               },
               {
-                maxSize: new go.Size(160, NaN)
+                maxSize: new go.Size(160, Infinity)
               },
               new go.Binding("text", "comment"),
               new go.Binding("visible", "comment", function(comment) { return comment!==""&&comment!==undefined;}),
