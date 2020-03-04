@@ -5,7 +5,7 @@
       <h2 class="my-4">{{$t('guide.text_content[0].title_text')}}</h2>
       <div v-html="$t('guide.text_content[0].intro_text')" class="my-4"></div>
       <v-divider></v-divider>
-      <div class="d-flex justify-content-start my-4" >        
+      <div class="d-flex justify-content-start my-4">        
         <v-progress-linear
           :value="progress"
           color="primary"
@@ -18,7 +18,7 @@
           </div>
         </v-progress-linear>
 
-          <v-btn color="primary" class="mx-2" @click="clickAllPanel()" style="width:16%;">
+          <v-btn color="primary" class="mx-2" @click="clickAllPanel()" style="width:16%; min-width: 150px">
               <v-icon left medium color="#fff" v-if="btn_show_expand">mdi-plus</v-icon>
               <v-icon left medium v-else>mdi-minus</v-icon>
               {{btn_expand}}
