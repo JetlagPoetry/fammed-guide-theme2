@@ -2,10 +2,20 @@
   <v-container>
     <v-row justify="center">
       <div class="mt-6 px-12" style="width:90%; max-width:1400px">
-        <h2 class="my-4">Summary</h2>
-        <v-divider class="my-6"></v-divider>
-        <diagram2 ref="diag" v-bind:model-data="$route.params.data" style="background-color: #f2f2f2; width: 100%; height: 800px"></diagram2>
-        <v-btn @click="generateImages()">TEST</v-btn>
+        <div class="d-flex justify-content-start my-4" style="width:100%">
+          <v-btn text large color="primary" class="mx-2" >
+              <v-icon left color="primary">mdi-arrow-left</v-icon>
+              Modify Your Customization
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn text class="mx-2" large color="primary"  @click="generateImages()">
+              Download Your PDF
+              <v-icon right color="primary">mdi-arrow-right</v-icon>
+          </v-btn>
+        </div>
+        <h2 class="my-4 mx-6">Summary</h2>
+        <v-divider class="ma-6"></v-divider>
+        <diagram2 class="mx-6" ref="diag" v-bind:model-data="$route.params.data" style="background-color: #f2f2f2; width: 100%; height: 800px"></diagram2>
       </div>
     </v-row>
   </v-container>
@@ -35,28 +45,7 @@ export default {
   methods: {
 
     generateImages() {
-
-      //making images
-      // var db = this.$refs.diag.diagram.documentBounds.copy();
-      // var boundswidth = db.width;
-      // var boundsheight = db.height;
-      // // var imgWidth = 6000;
-      // // var imgHeight = 10000;
-      // var p = db.position.copy();
-      //making images
-      // for (var i = 0; i < boundsheight; i += imgHeight) {
-      //   var img;
-      //   for (var j = 0; j < boundswidth; j += imgWidth) {
-      //     img = this.$refs.diag.diagram.makeImage({
-      //       scale: 1,
-      //       type: "image / jpeg",
-      //       background: "white",
-      //       position: new go.Point(p.x + j, p.y + i),
-      //       size: new go.Size(4000, NaN)
-      //     });
-      //   }
-      // }
-
+      
       var img = this.$refs.diag.diagram.makeImage({
         scale: 1,
         type: "image / jpeg",

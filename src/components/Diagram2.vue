@@ -9,42 +9,38 @@ export default {
   name: "Diagram2",
   data: () => ({
     diagram: '',
-    mt8: '',
-    mr8: '',
-    ml9: '',
     roundedRectangleParams: '',
   }),
   props: ["modelData"],
   mounted: function() {
     let $ = go.GraphObject.make;
-    this.mt8 = new go.Margin(8, 0, 0, 0);
-    this.mr8 = new go.Margin(0, 8, 0, 0);
-    this.ml8 = new go.Margin(0, 0, 0, 8);
     this.roundedRectangleParams = {
       parameter1: 2,  // set the rounded corner
       spot1: go.Spot.TopLeft, spot2: go.Spot.BottomRight  // make content go all the way to inside edges of rounded corners
     };
     var myDiagram = $(go.Diagram, this.$el,  // the DIV HTML element
 
-          {
-            // Put the diagram contents at the top center of the viewport
-            initialDocumentSpot: go.Spot.LeftCenter,
-            initialViewportSpot: go.Spot.LeftCenter,
-            hasVerticalScrollbar:false,
-            layout:
-              $(go.TreeLayout,  // use a TreeLayout to position all of the nodes
-                {
-                  angle: 0,
-                  alignment: go.TreeLayout.AlignmentStart,
-                  nodeIndent: 25,
-                  nodeIndentPastParent: 1,
-                  nodeSpacing: 20,
-                  layerSpacing: 80,
-                  layerSpacingParentOverlap: 1,
-                  portSpot: new go.Spot(0.001, 1, 20, 0),
-                  childPortSpot: go.Spot.Left
-                })
-          });
+      {
+        // Put the diagram contents at the top center of the viewport
+        initialDocumentSpot: go.Spot.TopCenter,
+        initialViewportSpot: go.Spot.TopCenter,
+        hasVerticalScrollbar:false,
+        padding: new go.Margin(56,0,56,0),
+        layout:
+          $(go.TreeLayout,  // use a TreeLayout to position all of the nodes
+            {
+              angle: 0,
+              alignment: go.TreeLayout.AlignmentStart,
+              nodeIndent: 25,
+              nodeIndentPastParent: 1,
+              nodeSpacing: 20,
+              layerSpacing: 80,
+              layerSpacingParentOverlap: 1,
+              portSpot: new go.Spot(0.001, 1, 20, 0),
+              childPortSpot: go.Spot.Left
+            })
+      });
+    myDiagram.isReadOnly = true;
     myDiagram.nodeTemplate =
         $(go.Node, "Auto",
           {
