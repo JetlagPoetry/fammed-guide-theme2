@@ -59,11 +59,8 @@
                   auto-grow
                   name="input-7-4"
                   :label="$t('guide.txt_instrHint')"
-                  v-model="panel_comment_temp[step_no]"
+                  v-model="panel_comment[step_no]"
                 ></v-textarea>
-                <v-btn color="primary" class="mb-4" @click="saveComment(step_no)">
-                  {{$t('guide.btn_save')}}
-                </v-btn>
               </div>
               
             </v-expansion-panel-content>
@@ -91,7 +88,6 @@ export default {
     panel_select : [], //If current step is selected.
     panel_expand : [], //If current step is expanded.
     panel_comment : [],
-    panel_comment_temp : [],
     btn_expand : "",
     btn_show_expand : true,
   }),
@@ -105,7 +101,6 @@ export default {
     this.panel_select = new Array(this.substep_number).fill(false);
     this.panel_expand = new Array(this.substep_number).fill(false);
     this.panel_comment = new Array(this.substep_number).fill("");
-    this.panel_comment_temp = new Array(this.substep_number).fill("");
     this.btn_expand = this.$t('guide.btn_expandAll');
   },
 
@@ -146,10 +141,6 @@ export default {
 
       itemIsRead (item) {
         return item===true;
-      },
-
-      saveComment (n) {
-        this.panel_comment[n] = this.panel_comment_temp[n];
       },
     },
 };
