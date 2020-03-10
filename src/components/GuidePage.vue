@@ -117,6 +117,7 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex';
 import Panel1 from './ExpansionPanel1';
 import Panel2 from './ExpansionPanel2';
 import Panel3 from './ExpansionPanel3';
@@ -147,8 +148,13 @@ export default {
         }
       },
     },
-
+  mounted:function(){
+      this.initPanel();
+  },
   methods: {
+    ...mapMutations([
+      'initPanel',
+    ]),
     toSummary () {
         var data = [];
         var i;

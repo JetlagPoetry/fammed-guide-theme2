@@ -2,11 +2,14 @@
   "name": "fammed-guide",
   "version": "0.1.0",
   "private": true,
+  "description": "## Project setup ``` npm install ```",
+  "author": "",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "main": "babel.config.js",
   "dependencies": {
     "core-js": "^3.4.4",
     "gojs": "^2.1.8",
@@ -15,11 +18,13 @@
     "vue": "^2.6.10",
     "vue-i18n": "^8.15.4",
     "vue-router": "^3.1.5",
-    "vuetify": "^2.1.0"
+    "vuetify": "^2.1.0",
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-plugin-vuex": "^4.2.3",
     "@vue/cli-service": "^4.1.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
@@ -48,16 +53,13 @@
     "> 1%",
     "last 2 versions"
   ],
-  "description": "## Project setup ``` npm install ```",
-  "main": "babel.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JetlagPoetry/fammed-guide.git"
-  },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/JetlagPoetry/fammed-guide/issues"
   },
-  "homepage": "https://github.com/JetlagPoetry/fammed-guide#readme"
+  "homepage": "https://github.com/JetlagPoetry/fammed-guide#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JetlagPoetry/fammed-guide.git"
+  }
 }
