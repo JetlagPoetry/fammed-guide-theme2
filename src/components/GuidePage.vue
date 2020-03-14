@@ -135,7 +135,6 @@ export default {
   data: () => ({
     cur_step: 1,
     steps: 4,
-    // progress : 90,
   }),
   props:{
   },
@@ -147,7 +146,8 @@ export default {
         }
       },
     },
-
+  mounted:function(){
+  },
   methods: {
     toSummary () {
         var data = [];

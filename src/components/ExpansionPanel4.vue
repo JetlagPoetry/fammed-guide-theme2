@@ -2,19 +2,19 @@
   <v-card
     class="mb-12"
     elevation="0">
-      <h2 class="my-4">{{$t('guide.text_content[3].title_text')}}</h2>
-      <div v-html="$t('guide.text_content[3].intro_text')" class="my-4"></div>
+      <h2 class="my-4">{{$t('guide.text_content['+step+'].title_text')}}</h2>
+      <div v-html="$t('guide.text_content['+step+'].intro_text')" class="my-4"></div>
       <v-divider></v-divider>
       <div class="d-flex justify-content-start my-4" >        
         <v-progress-linear
-          :value="progress"
+          :value="panel_progress[step]"
           color="primary"
           height="15px"
           class="my-3 mx-4"
           striped
         >
           <div style="color:white">
-            {{progress.toFixed(0)}}%
+            {{panel_progress[step].toFixed(1)}}%
           </div>
         </v-progress-linear>
 
@@ -24,31 +24,34 @@
               {{btn_expand}}
           </v-btn>
 
-          <v-btn color="primary" class="mx-2" @click="selectAllPanel()">
+          <v-btn color="primary" class="mx-2" @click="selectAllPanel(step)">
               {{$t('guide.btn_selectAll')}}
           </v-btn>
       </div>
       <v-row justify="center">
+        <div>select:{{panel_select[step]}}</div>
+        <div>read:{{panel_read[step]}}</div> 
+        <div>progress:{{panel_progress[step]}}</div>
+        <div>comment:{{panel_comment[step]}}</div>
         <v-expansion-panels inset multiple focusable class="mx-4" v-model="panel_expand">
           <v-expansion-panel
-            v-for="(item,step_no) in substep_number"
+            v-for="(item,step_no) in substeps[step]"
             :key="step_no"
             @click="readItem(step_no)"
             >
             <v-expansion-panel-header disable-icon-rotate>
-              <!-- {{subheader_text[step_no]}} -->
-              {{$t('guide.text_content[3].subheader_text['+step_no+']')}}
+              {{$t('guide.text_content['+step+'].subheader_text['+step_no+']')}}
               <template v-slot:actions>
-                <v-icon color="primary" v-if="panel_select[step_no]">mdi-checkbox-marked-circle</v-icon>
-                <v-icon color="#ccc" v-else-if="panel_read[step_no]">mdi-checkbox-marked-circle</v-icon>
+                <v-icon color="primary" v-if="panel_select[step][step_no]">mdi-checkbox-marked-circle</v-icon>
+                <v-icon color="#ccc" v-else-if="panel_read[step][step_no]">mdi-checkbox-marked-circle</v-icon>
               </template>
             </v-expansion-panel-header>
             <v-expansion-panel-content class="pt-4">
-              <div v-html="$t('guide.text_content[3].guide_text['+step_no+']')"></div>
+              <div v-html="$t('guide.text_content['+step+'].guide_text['+step_no+']')"></div>
               <v-divider class="my-6"></v-divider>
               <div class="d-flex justify-content-start mb-6" >
                 <label class="checkbox-label">
-                    <input type="checkbox" v-model="panel_select[step_no]">
+                    <input type="checkbox" v-model="panel_select[step][step_no]">
                     <span class="checkbox-custom rectangular"></span>
                 </label>
                 <label class="input-title">{{$t('guide.cbx_selectHint')}}</label>
@@ -59,7 +62,7 @@
                   auto-grow
                   name="input-7-4"
                   :label="$t('guide.txt_instrHint')"
-                  v-model="panel_comment[step_no]"
+                  v-model="panel_comment[step][step_no]"
                 ></v-textarea>
               </div>
               
@@ -71,52 +74,51 @@
 </template>
 
 <script>
-
-// import Vue from 'vue'
-
+import { mapState, mapMutations} from 'vuex'
 export default {
   name: 'App',
 
   components: {
-    // HelloWorld,
   },
 
   data: () => ({
-    substep_number : 11,
-    progress : 0 ,
-    panel_read : [], //If current step is read.
-    panel_select : [], //If current step is selected.
-    panel_expand : [], //If current step is expanded.
-    panel_comment : [],
+    step: 3,
+    panel_expand : [],
     btn_expand : "",
     btn_show_expand : true,
-
   }),
+
+  computed:{
+    ...mapState({
+    substeps: 'substeps',
+    panel_comment: (state) => state.panel_comment,
+    panel_select: (state) => state.panel_select,
+    panel_read: (state) => state.panel_read,
+    panel_progress: (state) => state.panel_progress
+  })},
 
   watch: {
   },
 
   mounted:function(){
-    //Initialize arrays
-    this.panel_read = new Array(this.substep_number).fill(false);
-    this.panel_select = new Array(this.substep_number).fill(false);
-    this.panel_expand = new Array(this.substep_number).fill(false);
-    this.panel_comment = new Array(this.substep_number).fill("");
+    this.panel_expand = new Array(this.substeps[this.step]).fill(false);
     this.btn_expand = this.$t('guide.btn_expandAll');
   },
 
   methods: {
-
+      ...mapMutations([
+            'readAllPanel',
+            'selectAllPanel',
+            'progressIncrement',
+            'progressFinished'
+          ]),
       clickAllPanel() {
         if(this.btn_show_expand){
-          //Click expand all, read all panels
-          this.panel_expand = [...Array(this.substep_number).keys()].map((k, i) => i);
-          this.panel_read.fill(true);
-          this.progress = 100;
+          this.panel_expand = [...Array(this.substeps[this.step]).keys()].map((k, i) => i);
           this.btn_expand = this.$t('guide.btn_collapseAll');
           this.btn_show_expand = false;
+          this.readAllPanel(this.step);
         }else{
-          //Click collapse all, reset all panels
           this.panel_expand = [];
           this.btn_expand = this.$t('guide.btn_expandAll');
           this.btn_show_expand = true;
@@ -124,18 +126,12 @@ export default {
         
       },
 
-      selectAllPanel() {
-        this.panel_read = new Array(this.substep_number).fill(true);
-        this.panel_select = new Array(this.substep_number).fill(true);
-        this.progress = 100;
-      },
-
       readItem (n) {
-        if(!this.panel_read[n]){
-          this.panel_read[n] = true;
-          this.progress = this.progress + 100.0/this.panel_read.length;
-          if(this.panel_read.every(this.itemIsRead)){
-            this.progress = 100;
+        if(!this.panel_read[this.step][n]){
+          this.panel_read[this.step][n] = true;
+          this.progressIncrement(this.step);
+          if(this.panel_read[this.step].every(this.itemIsRead)){
+            this.progressFinished(this.step);
           }
         }
       },
