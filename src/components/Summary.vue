@@ -3,7 +3,7 @@
     <v-row justify="center">
       <div class="mt-6 px-12" style="width:90%; max-width:1400px">
         <div class="d-flex justify-content-start my-4" style="width:100%">
-          <v-btn text large color="primary" class="mx-2" >
+          <v-btn text large color="primary" class="mx-2" @click="toGuidePage()">
               <v-icon left color="primary">mdi-arrow-left</v-icon>
               Modify Your Customization
           </v-btn>
@@ -43,9 +43,11 @@ export default {
     
   },
   methods: {
+    toGuidePage() {
+      this.$router.push('/guide');
+    },
 
     generateImages() {
-      
       var img = this.$refs.diag.diagram.makeImage({
         scale: 1,
         type: "image / jpeg",

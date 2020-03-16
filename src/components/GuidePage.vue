@@ -121,6 +121,7 @@ import Panel1 from './ExpansionPanel1';
 import Panel2 from './ExpansionPanel2';
 import Panel3 from './ExpansionPanel3';
 import Panel4 from './ExpansionPanel4';
+import {mapState} from 'vuex'
 
 export default {
   name: 'Stepper',
@@ -136,8 +137,17 @@ export default {
     cur_step: 1,
     steps: 4,
   }),
+
   props:{
+
   },
+
+  computed:{
+    ...mapState({
+    substeps: 'substeps',
+    panel_comment: (state) => state.panel_comment,
+    panel_select: (state) => state.panel_select
+  })},
 
   watch: {
       steps (val) {
@@ -155,31 +165,16 @@ export default {
         var key=0;
         for(i=0; i<4; i++){
 
-          var panel;
-          switch(i){
-            case 0:
-              panel = this.$refs.panel1;
-              break;
-            case 1:
-              panel = this.$refs.panel2;
-              break;            
-            case 2:
-              panel = this.$refs.panel3;
-              break;
-            case 3:
-              panel = this.$refs.panel4;
-              break;
-          }
           var parent = key;
           data.push({"key":key++, "substep":this.$t('guide.text_content['+i+'].title_text'), "isParent": true });
 
           var j;
-          for(j=0; j< panel.substep_number; j++){
+          for(j=0; j < this.substeps[i]; j++){
             data.push({
               "key": key++,
               "substep": this.$t('guide.text_content['+i+'].subheader_text['+j+']'), 
-              "comment": panel.panel_comment[j],
-              "selected": panel.panel_select[j],
+              "comment": this.panel_comment[i][j],
+              "selected": this.panel_select[i][j],
               "parent": parent,
               "isParent": false,
             });

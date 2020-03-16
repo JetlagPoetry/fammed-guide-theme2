@@ -29,10 +29,6 @@
           </v-btn>
       </div>
       <v-row justify="center">
-        <div>select:{{panel_select[step]}}</div>
-        <div>read:{{panel_read[step]}}</div> 
-        <div>progress:{{panel_progress[step]}}</div>
-        <div>comment:{{panel_comment[step]}}</div>
         <v-expansion-panels inset multiple focusable class="mx-4" v-model="panel_expand">
           <v-expansion-panel
             v-for="(item,step_no) in substeps[step]"

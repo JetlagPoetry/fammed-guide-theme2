@@ -14,7 +14,7 @@
           striped
         >
           <div style="color:white">
-            {{panel_progress[step].toFixed(1)}}%
+            {{panel_progress[step].toFixed(0)}}%
           </div>
         </v-progress-linear>
 
@@ -29,10 +29,6 @@
           </v-btn>
       </div>
       <v-row justify="center">
-        <div>select:{{panel_select}}</div>
-        <div>read:{{panel_read}}</div> 
-        <div>progress:{{panel_progress}}</div>
-        <div>comment:{{panel_comment}}</div>
         <v-expansion-panels inset multiple focusable class="mx-4" v-model="panel_expand">
           <v-expansion-panel
             v-for="(item,step_no) in substeps[step]"

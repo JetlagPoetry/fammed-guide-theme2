@@ -41,6 +41,18 @@
     </v-app-bar>
     <v-content>
       <router-view></router-view>
+      <v-btn 
+        color="primary"
+        fab
+        dark
+        bottom
+        right
+        fixed
+        v-scroll="onScroll"
+        v-show="fab"
+        @click="toTop()">
+        <v-icon>mdi-chevron-double-up</v-icon>
+      </v-btn>
     </v-content>
   </v-app>
 </template>
@@ -54,7 +66,7 @@ export default {
   },
 
   data: () => ({
-  
+    fab: false
   }),
 
   watch: {
@@ -76,7 +88,17 @@ export default {
         }else{
           this.$i18n.locale='fr';
         }
+      },
+
+      onScroll(e) {
+        if (typeof window === 'undefined') return;
+        const top = window.pageYOffset ||   e.target.scrollTop || 0;
+        this.fab = top > 20;
+      },
+      toTop() {
+        this.$vuetify.goTo(0);
       }
+
     },
 };
 </script>
