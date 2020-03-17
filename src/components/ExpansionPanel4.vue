@@ -14,7 +14,7 @@
           striped
         >
           <div style="color:white">
-            {{panel_progress[step].toFixed(1)}}%
+            {{panel_progress[step].toFixed(0)}}%
           </div>
         </v-progress-linear>
 
@@ -85,13 +85,13 @@ export default {
   }),
 
   computed:{
-    ...mapState({
-    substeps: 'substeps',
-    panel_comment: (state) => state.panel_comment,
-    panel_select: (state) => state.panel_select,
-    panel_read: (state) => state.panel_read,
-    panel_progress: (state) => state.panel_progress
-  })},
+    ...mapState([
+      'substeps',
+      'panel_comment',
+      'panel_select',
+      'panel_read',
+      'panel_progress'])
+  },
 
   watch: {
   },

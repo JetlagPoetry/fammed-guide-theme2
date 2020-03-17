@@ -121,7 +121,7 @@ import Panel1 from './ExpansionPanel1';
 import Panel2 from './ExpansionPanel2';
 import Panel3 from './ExpansionPanel3';
 import Panel4 from './ExpansionPanel4';
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: 'Stepper',
@@ -159,6 +159,10 @@ export default {
   mounted:function(){
   },
   methods: {
+    ...mapMutations([
+            'saveDiagramData'
+          ]),
+
     toSummary () {
         var data = [];
         var i;
@@ -181,11 +185,13 @@ export default {
             
           }
         }
-      
-        this.$router.push({
-          name:'summary', 
-          params:{ 
-            data: data}});
+        
+        // this.$router.push({
+        //   name:'summary', 
+        //   params:{ 
+        //     data: data}});
+        this.saveDiagramData(data);
+        this.$router.push('/summary');
       },
 
 

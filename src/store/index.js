@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from "vuex-persistedstate";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
@@ -25,6 +26,7 @@ export default new Vuex.Store({
 			["", "", "", "", "", "", "", "", "", "", ""]
 		],
 		panel_progress: [0, 0, 0, 0],
+		diagram_data: ""
 	},
 	mutations: {
 		readAllPanel(state, n) {
@@ -41,9 +43,23 @@ export default new Vuex.Store({
 		},
 		progressFinished(state, n) {
 			Vue.set(state.panel_progress, n, 100);
+		},
+		saveDiagramData(state, data) {
+			Vue.set(state, 'diagram_data', data);
 		}
 	},
 	actions: {},
 
-	modules: {}
+	modules: {},
+
+	plugins: [
+		createPersistedState({
+			storage: window.sessionStorage,
+			reducer(val) {
+				return {
+					diagram_data: val.diagram_data
+				};
+			}
+		})
+	]
 })

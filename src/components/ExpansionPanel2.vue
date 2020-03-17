@@ -65,11 +65,11 @@ export default {
   }),
 
   computed:{
-    ...mapState({
-    substeps: 'substeps',
-    panel_comment: (state) => state.panel_comment,
-    panel_select: (state) => state.panel_select,
-  })},
+    ...mapState([
+      'substeps',
+      'panel_comment',
+      'panel_select'])
+  },
 
   watch: {
   },
