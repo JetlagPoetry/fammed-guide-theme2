@@ -26,6 +26,7 @@ export default {
         initialViewportSpot: go.Spot.TopCenter,
         hasVerticalScrollbar:false,
         padding: new go.Margin(56,0,56,0),
+        isReadOnly: true,
         layout:
           $(go.TreeLayout,  // use a TreeLayout to position all of the nodes
             {
@@ -40,7 +41,9 @@ export default {
               childPortSpot: go.Spot.Left
             })
       });
-    myDiagram.isReadOnly = true;
+
+    myDiagram.toolManager.panningTool.isEnabled = false;
+    myDiagram.toolManager.dragSelectingTool.isEnabled = false;
     myDiagram.nodeTemplate =
         $(go.Node, "Auto",
           {
@@ -58,8 +61,6 @@ export default {
           },
           $(go.Shape, "RoundedRectangle", this.roundedRectangleParams,
             { name: "SHAPE", fill: "#ffffff", strokeWidth: 0 },
-            // bluish if highlighted, white otherwise
-            new go.Binding("fill", "isHighlighted", function(h) { return h ? "#e8eaf6" : "#ffffff"; }).ofObject()
           ),
           $(go.Panel, "Vertical",
             { maxSize: new go.Size(600, Infinity), },
