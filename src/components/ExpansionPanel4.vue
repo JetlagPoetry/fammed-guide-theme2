@@ -18,7 +18,7 @@
           </div>
         </v-progress-linear>
 
-          <v-btn color="primary" class="mx-2" @click="clickAllPanel()" style="width:16%; min-width: 150px">
+          <v-btn color="primary" class="mx-2" @click="clickAllPanel()" style="width:16%; min-width: 160px">
               <v-icon left medium color="#fff" v-if="btn_show_expand">mdi-plus</v-icon>
               <v-icon left medium v-else>mdi-minus</v-icon>
               {{btn_expand}}

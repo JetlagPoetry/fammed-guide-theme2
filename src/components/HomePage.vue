@@ -1,7 +1,7 @@
 <template>
   <v-container fluid style="padding:0; margin:0">
     <v-parallax 
-      style="background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); height: 90vh">
+      style="background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); height: 90vh; min-height:600px">
           <v-row
             align="center"
             justify="center"
@@ -9,7 +9,7 @@
           <v-col class="text-center pb-12" cols="12">
             <h1 class="mb-8" style="font-size: 38px;">{{$t('home.text_title')}}</h1>
             <div v-html="$t('home.text_desc')"></div>
-            <v-btn outlined x-large color="#fff" @click="toGuidePage">
+            <v-btn class="my-6" outlined x-large color="#fff" @click="toGuidePage">
               {{$t('home.btn_customize')}}<v-icon right>mdi-arrow-right</v-icon> 
             </v-btn>
             
@@ -78,37 +78,36 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-footer>
-      <div class="flex text-center bg-dark pt-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 p-3">
-              <h2 class="mb-4">Contact</h2>
-              <p class="m-0">
-                <a href="tel:+246 - 542 550 5462" class="text-white">+246 - 542 550 5462</a>
-              </p>
-              <p>
-                <a href="mailto:info@pingendo.com" class="text-white">info@pingendo.com</a>
-              </p>
-            </div>
-            <div class="col-md-4 p-3">
-              <h2 class="mb-4">Location</h2>
-              <p>
-                <a href="https://www.google.it/maps" target="blank" class="text-white">23 Fake Street <br>Seattle, WA 00000</a>
-              </p>
-            </div>
-            <div class="col-md-4 p-3">
-              <h2 class="mb-4">Openings</h2>
-              <p>11:00 - 15:00 &amp; 19:00 - 00:00 Tue/Fri <br>11:00 - 15:00 &amp; 19:00 - 02:00 Sat/Sun</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 mt-3">
-              <p class="text-center text-muted">© Copyright 2018 Pingendo - All rights reserved. </p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <v-footer
+      padless
+    >
+      <v-card
+        flat
+        tile
+        class="indigo lighten-1 white--text text-center"
+      >
+        <v-card-text>
+          <v-btn class="ma-2" text icon color="#fff">
+            <v-icon>mdi-home</v-icon>
+          </v-btn>
+          <v-btn class="ma-2" text icon color="#fff">
+            <v-icon>mdi-email</v-icon>
+          </v-btn>
+          <v-btn class="ma-2" text icon color="#fff">
+            <v-icon>mdi-calendar</v-icon>
+          </v-btn>
+        </v-card-text>
+
+        <v-card-text class="white--text pt-0">
+          Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text class="white--text">
+          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        </v-card-text>
+      </v-card>
     </v-footer>
   </v-container>
 </template>
