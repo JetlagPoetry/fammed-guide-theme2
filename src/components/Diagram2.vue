@@ -4,14 +4,19 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 import go from 'gojs';
 export default {
+
   name: "Diagram2",
+
   data: () => ({
     diagram: '',
     roundedRectangleParams: '',
   }),
+
   props: ["modelData"],
+
   mounted: function() {
     let $ = go.GraphObject.make;
     this.roundedRectangleParams = {
@@ -27,6 +32,15 @@ export default {
         hasVerticalScrollbar:false,
         padding: new go.Margin(56,0,56,0),
         isReadOnly: true,
+        "ViewportBoundsChanged": function() {
+          myDiagram.allowHorizontalScroll = false;
+          myDiagram.allowVerticalScroll = false;
+        },
+        "InitialLayoutCompleted": function(e) {
+            var dia = e.diagram;
+            // add height for horizontal scrollbar
+            dia.div.style.height = (dia.documentBounds.height+24) + "px";
+        },
         layout:
           $(go.TreeLayout,  // use a TreeLayout to position all of the nodes
             {
@@ -41,9 +55,8 @@ export default {
               childPortSpot: go.Spot.Left
             })
       });
-
     myDiagram.toolManager.panningTool.isEnabled = false;
-    myDiagram.toolManager.dragSelectingTool.isEnabled = false;
+
     myDiagram.nodeTemplate =
         $(go.Node, "Auto",
           {
@@ -117,13 +130,17 @@ export default {
           nodeDataArray: this.modelData,
         });
     this.diagram = myDiagram;
-    // this.updateModel(this.modelData);
   },
   watch: {
-    // modelData: function(val) { this.updateModel(val); }
   },
   methods: {
-    model: function() { return this.diagram.model; }
+    model: function() {
+     return this.diagram.model;
+    },
+
+    ...mapMutations([
+            'updateTest'
+          ])
   }
 }
 </script>

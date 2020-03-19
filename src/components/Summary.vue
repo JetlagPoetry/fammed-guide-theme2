@@ -15,7 +15,7 @@
         </div>
         <h2 class="my-4 mx-6">Summary</h2>
         <v-divider class="ma-6"></v-divider>
-        <diagram2 class="mx-6" ref="diag" v-bind:model-data="diagram_data" style="background-color: #f2f2f2; width: 100%; height: 800px"></diagram2>
+        <diagram2 class="mx-6" ref="diag" v-bind:model-data="diagram_data" style="background-color: #fff; width: 100%;"></diagram2>
       </div>
     </v-row>
   </v-container>
@@ -40,7 +40,8 @@ export default {
 
   computed:{
     ...mapState([
-      'diagram_data'])
+      'diagram_data',
+      'test'])
   },
 
   mounted: function() {

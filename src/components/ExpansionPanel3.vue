@@ -6,7 +6,7 @@
       <div v-html="$t('guide.text_content['+step+'].intro_text')" class="my-4"></div>
       <v-divider></v-divider>
       <div class="d-flex justify-content-start my-4" >        
-          <v-btn color="primary" class="mx-2" @click="clickAllPanel()" style="width:16%; min-width: 150px">
+          <v-btn color="primary" class="mx-2" @click="clickAllPanel()" style="width:16%; min-width: 160px">
               <v-icon left medium color="#fff" v-if="btn_show_expand">mdi-plus</v-icon>
               <v-icon left medium v-else>mdi-minus</v-icon>
               {{btn_expand}}

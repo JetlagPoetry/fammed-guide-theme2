@@ -26,7 +26,8 @@ export default new Vuex.Store({
 			["", "", "", "", "", "", "", "", "", "", ""]
 		],
 		panel_progress: [0, 0, 0, 0],
-		diagram_data: ""
+		diagram_data: "",
+		test:""
 	},
 	mutations: {
 		readAllPanel(state, n) {
@@ -46,6 +47,9 @@ export default new Vuex.Store({
 		},
 		saveDiagramData(state, data) {
 			Vue.set(state, 'diagram_data', data);
+		},
+		updateTest(state, data){
+			Vue.set(state, 'test', data);
 		}
 	},
 	actions: {},
