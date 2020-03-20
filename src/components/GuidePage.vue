@@ -186,11 +186,6 @@ export default {
             
           }
         }
-        
-        // this.$router.push({
-        //   name:'summary', 
-        //   params:{ 
-        //     data: data}});
         this.saveDiagramData(data);
         this.$router.push('/summary');
       },

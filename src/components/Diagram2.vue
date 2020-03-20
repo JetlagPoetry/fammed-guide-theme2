@@ -20,13 +20,12 @@ export default {
   mounted: function() {
     let $ = go.GraphObject.make;
     this.roundedRectangleParams = {
-      parameter1: 2,  // set the rounded corner
-      spot1: go.Spot.TopLeft, spot2: go.Spot.BottomRight  // make content go all the way to inside edges of rounded corners
+      parameter1: 2,
+      spot1: go.Spot.TopLeft, spot2: go.Spot.BottomRight
     };
-    var myDiagram = $(go.Diagram, this.$el,  // the DIV HTML element
+    var myDiagram = $(go.Diagram, this.$el,
 
       {
-        // Put the diagram contents at the top center of the viewport
         initialDocumentSpot: go.Spot.TopCenter,
         initialViewportSpot: go.Spot.TopCenter,
         hasVerticalScrollbar:false,
@@ -38,19 +37,19 @@ export default {
         },
         "InitialLayoutCompleted": function(e) {
             var dia = e.diagram;
-            // add height for horizontal scrollbar
             dia.div.style.height = (dia.documentBounds.height+24) + "px";
         },
         layout:
-          $(go.TreeLayout,  // use a TreeLayout to position all of the nodes
+          $(go.TreeLayout, 
             {
               angle: 0,
               alignment: go.TreeLayout.AlignmentStart,
-              nodeIndent: 25,
+              nodeIndent: 20,
               nodeIndentPastParent: 1,
-              nodeSpacing: 20,
+              nodeSpacing: 25,
               layerSpacing: 80,
               layerSpacingParentOverlap: 1,
+              arrangementSpacing: new go.Size(0,50),
               portSpot: new go.Spot(0.001, 1, 20, 0),
               childPortSpot: go.Spot.Left
             })
@@ -62,18 +61,18 @@ export default {
           {
             locationSpot: go.Spot.TopCenter,
             isShadowed: true, shadowBlur: 1,
-            shadowOffset: new go.Point(0, 1),
+            shadowOffset: new go.Point(1, 1),
             shadowColor: "rgba(0, 0, 0, .14)",
-            selectionAdornmentTemplate:  // selection adornment to match shape of nodes
+            selectionAdornmentTemplate:
               $(go.Adornment, "Auto",
                 $(go.Shape, "RoundedRectangle", this.roundedRectangleParams,
-                  { fill: null, stroke: "#7986cb", strokeWidth: 3 }
+                  { fill: null, stroke: "#7986cb", strokeWidth: 1 }
                 ),
                 $(go.Placeholder)
-              )  // end Adornment
+              )
           },
           $(go.Shape, "RoundedRectangle", this.roundedRectangleParams,
-            { name: "SHAPE", fill: "#ffffff", strokeWidth: 0 },
+            { name: "SHAPE", fill: "#ffffff", strokeWidth: 1, stroke: "#adadad" },
           ),
           $(go.Panel, "Vertical",
             { maxSize: new go.Size(600, Infinity), },
@@ -92,7 +91,7 @@ export default {
                   maxSize: new go.Size(550, Infinity)
                 },
                 new go.Binding("text", "substep"),
-                new go.Binding("stroke", "selected", function(selected){ return selected ? "#424242":"#D3D3D3"})
+                new go.Binding("stroke", "selected", function(selected){ return selected ? "#424242":"#adadad"})
               )
             ),
             $(go.Shape, "LineH",
@@ -122,11 +121,11 @@ export default {
         $(go.Link, go.Link.Orthogonal,
           { corner: 5, selectable: false },
           $(go.Shape, { strokeWidth: 3, stroke: "#424242" }),
-          );  // dark gray, rounded corner links
+          );
     myDiagram.model =
       $(go.TreeModel,
         {
-          nodeParentKeyProperty: "parent",  // this property refers to the parent node data
+          nodeParentKeyProperty: "parent",
           nodeDataArray: this.modelData,
         });
     this.diagram = myDiagram;
