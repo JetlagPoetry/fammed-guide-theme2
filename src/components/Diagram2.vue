@@ -120,7 +120,7 @@ export default {
     myDiagram.linkTemplate =
         $(go.Link, go.Link.Orthogonal,
           { corner: 5, selectable: false },
-          $(go.Shape, { strokeWidth: 3, stroke: "#424242" }),
+          $(go.Shape, { strokeWidth: 2, stroke: "#424242" }),
           );
     myDiagram.model =
       $(go.TreeModel,
