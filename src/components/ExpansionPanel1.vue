@@ -18,13 +18,13 @@
           </div>
         </v-progress-linear>
 
-          <v-btn color="primary" class="mx-2" @click="clickAllPanel()" style="width:16%; min-width: 160px">
-              <v-icon left medium color="#fff" v-if="btn_show_expand">mdi-plus</v-icon>
-              <v-icon left medium v-else>mdi-minus</v-icon>
+          <v-btn tile outlined color="primary" class="mx-2" @click="clickAllPanel()" style="width:16%; min-width: 160px">
+              <v-icon left v-if="btn_show_expand">mdi-plus</v-icon>
+              <v-icon left v-else>mdi-minus</v-icon>
               {{btn_expand}}
           </v-btn>
 
-          <v-btn color="primary" class="mx-2" @click="selectAllPanel(step)">
+          <v-btn tile outlined color="primary" class="mx-2" @click="selectAllPanel(step)">
               {{$t('guide.btn_selectAll')}}
           </v-btn>
       </div>

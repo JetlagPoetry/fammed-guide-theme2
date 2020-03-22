@@ -25,17 +25,20 @@
       <v-btn
           @click="toHomePage"
           text
+          color="secondary"
         >
           <span class="mr-2">{{$t('nav.btn_home')}}</span>
         </v-btn>
         <v-btn
           @click="toGuidePage"
+          color="secondary"
           text
         >
           <span class="mr-2">{{$t('nav.btn_guide')}}</span>
         </v-btn>
         <v-btn
           @click="changeLanguage"
+          color="secondary"
           text
         >
           <span class="mr-2">{{$t('nav.btn_lang')}}</span>

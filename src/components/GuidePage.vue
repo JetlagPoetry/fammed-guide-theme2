@@ -30,14 +30,17 @@
             :step="1"
           >
             <Panel1 ref="panel1"/>
-
+            <div class="d-flex justify-content-start my-4" style="width:100%">
+              <v-spacer></v-spacer>
             <v-btn
-              color="primary"
+              tile outlined color="primary"
               @click="nextStep(1)"
               class="mx-2"
             >
               {{$t('guide.btn_next')}}
+              <v-icon right color="primary">mdi-arrow-right</v-icon>
             </v-btn>
+          </div>
           </v-stepper-content>
 
           <v-stepper-content
@@ -45,22 +48,25 @@
             :step="2"
           >
             <Panel2 ref="panel2"/>
-
-            <v-btn
-              color="primary"
-              @click="lastStep(2)"
-              class="mx-2"
-            >
-              {{$t('guide.btn_previous')}}
-            </v-btn>
-
-            <v-btn
-              color="primary"
-              @click="nextStep(2)"
-              class="mx-2"
-            >
+            <div class="d-flex justify-content-start my-4" style="width:100%">
+              <v-btn
+                tile outlined color="primary"
+                @click="lastStep(2)"
+                class="mx-2"
+              >
+                <v-icon left color="primary">mdi-arrow-left</v-icon>
+                {{$t('guide.btn_previous')}}
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn
+                tile outlined color="primary"
+                @click="nextStep(2)"
+                class="mx-2"
+              >
               {{$t('guide.btn_next')}}
+              <v-icon right color="primary">mdi-arrow-right</v-icon>
             </v-btn>
+          </div>
           </v-stepper-content>
 
           <v-stepper-content
@@ -68,22 +74,25 @@
             :step="3"
           >
             <Panel3 ref="panel3"/>
-
-            <v-btn
-              color="primary"
-              @click="lastStep(3)"
-              class="mx-2"
-            >
-              {{$t('guide.btn_previous')}}
-            </v-btn>
-
-            <v-btn
-              color="primary"
-              @click="nextStep(3)"
-              class="mx-2"
-            >
-              {{$t('guide.btn_next')}}
-            </v-btn>
+            <div class="d-flex justify-content-start my-4" style="width:100%">
+              <v-btn
+                tile outlined color="primary"
+                @click="lastStep(3)"
+                class="mx-2"
+              >
+                <v-icon left color="primary">mdi-arrow-left</v-icon>
+                {{$t('guide.btn_previous')}}
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn
+                tile outlined color="primary"
+                @click="nextStep(3)"
+                class="mx-2"
+              >
+                {{$t('guide.btn_next')}}
+                <v-icon right color="primary">mdi-arrow-right</v-icon>
+              </v-btn>
+            </div>
           </v-stepper-content>
 
           <v-stepper-content
@@ -91,23 +100,25 @@
             :step="4"
           >
             <Panel4 ref="panel4"/>
-
-            <v-btn
-              color="primary"
-              @click="lastStep(4)"
-              class="mx-2"
-            >
-              {{$t('guide.btn_previous')}}
-            </v-btn>
-
-            <v-btn
-              color="primary"
-              @click="toSummary()"
-              class="mx-2"
-            >
-              {{$t('guide.btn_export')}}
-            </v-btn>
-            
+            <div class="d-flex justify-content-start my-4" style="width:100%">
+              <v-btn
+                tile outlined color="primary"
+                @click="lastStep(4)"
+                class="mx-2"
+              >
+                <v-icon left color="primary">mdi-arrow-left</v-icon>
+                {{$t('guide.btn_previous')}}
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn
+                tile outlined color="primary"
+                @click="toSummary()"
+                class="mx-2"
+              >
+                {{$t('guide.btn_export')}}
+                <v-icon right color="primary">mdi-arrow-right</v-icon>
+              </v-btn>
+            </div>
           </v-stepper-content>
 
 

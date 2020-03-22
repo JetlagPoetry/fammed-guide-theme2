@@ -2,5 +2,5 @@ module.exports = {
   "transpileDependencies": [
     "vuetify"
   ],
-  publicPath: '/fammed-guide/'
+  publicPath: '/fammed-guide-theme2/'
 }
