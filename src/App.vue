@@ -4,6 +4,8 @@
       app
       color="primary"
       dark
+      hide-on-scroll
+      height="70px"
     >
       <div class="d-flex align-center">
         <v-img

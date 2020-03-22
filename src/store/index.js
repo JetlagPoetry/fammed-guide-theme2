@@ -27,6 +27,8 @@ export default new Vuex.Store({
 		],
 		panel_progress: [0, 0, 0, 0],
 		diagram_data: "",
+		diagram_width: 0,
+		diagram_height: 0,
 		test:""
 	},
 	mutations: {
@@ -50,6 +52,10 @@ export default new Vuex.Store({
 		},
 		updateTest(state, data){
 			Vue.set(state, 'test', data);
+		},
+		storeDiagramSize(state, data){
+			Vue.set(state, 'diagram_height', data.height);
+			Vue.set(state, 'diagram_width', data.width);
 		}
 	},
 	actions: {},

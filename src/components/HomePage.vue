@@ -84,7 +84,8 @@
       <v-card
         flat
         tile
-        class="indigo lighten-1 white--text text-center"
+        color="dimgray"
+        class="lighten-1 white--text text-center"
       >
         <v-card-text>
           <v-btn class="ma-2" text icon color="#fff">

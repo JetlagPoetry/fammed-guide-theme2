@@ -11,6 +11,7 @@ export default new Vuetify({
         secondary: '#b0bec5',
         third: 'ffc841',
         anchor: '#8c9eff',
+        dimgray: '#99aaaa '
       },
     },
   },

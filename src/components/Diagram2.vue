@@ -35,10 +35,7 @@ export default {
           myDiagram.allowHorizontalScroll = false;
           myDiagram.allowVerticalScroll = false;
         },
-        "InitialLayoutCompleted": function(e) {
-            var dia = e.diagram;
-            dia.div.style.height = (dia.documentBounds.height+24) + "px";
-        },
+        "InitialLayoutCompleted": this.loadDiagramProperties,
         layout:
           $(go.TreeLayout, 
             {
@@ -85,7 +82,7 @@ export default {
               ),
               $(go.TextBlock,
                 {
-                  font: "12px Roboto, sans-serif",
+                  font: "12px Roboto",
                   wrap: go.TextBlock.WrapFit,
                   isMultiline: true,
                   maxSize: new go.Size(550, Infinity)
@@ -103,16 +100,15 @@ export default {
             ),
             $(go.TextBlock, 
             {
-                font: "12px Roboto, sans-serif",
-                stroke: "rgba(0, 0, 0, .87)",
-                maxSize: new go.Size(160, Infinity),
-                width: 300,
-              },
-              {
-                maxSize: new go.Size(160, Infinity)
-              },
+                font: "12px verdana",
+                wrap: go.TextBlock.WrapFit,
+                isMultiline: true,
+                maxSize: new go.Size(550, Infinity),
+                margin : new go.Margin(10, 10, 10, 10)
+            },
+              new go.Binding("stroke", "selected", function(selected){ return selected ? "#424242":"#adadad"}),
               new go.Binding("text", "comment"),
-              new go.Binding("visible", "comment", function(comment) { return comment!==""&&comment!==undefined;}),
+              new go.Binding("visible", "" , function(data) { return (data.comment!==""&&data.comment!==undefined)&&!data.isParent;}),
             ),
           ),
         );
@@ -138,8 +134,16 @@ export default {
     },
 
     ...mapMutations([
-            'updateTest'
-          ])
+      'storeDiagramSize'
+    ]),
+    loadDiagramProperties: function(e) {
+      var dia = e.diagram;
+      dia.div.style.height = (dia.documentBounds.height+24) + "px";
+      this.storeDiagramSize({height: dia.documentBounds.height+24, width: dia.documentBounds.width});
+    }
+
+    
+
   }
 }
 </script>
