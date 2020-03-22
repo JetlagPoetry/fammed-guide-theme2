@@ -67,7 +67,9 @@ export default new Vuex.Store({
 			storage: window.sessionStorage,
 			reducer(val) {
 				return {
-					diagram_data: val.diagram_data
+					diagram_data: val.diagram_data,
+					diagram_height: val.diagram_height,
+					diagram_width: val.diagram_width,
 				};
 			}
 		})
