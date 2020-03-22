@@ -111,5 +111,10 @@
         ]
       }
     ]
+  },
+  "summary":{
+    "btn_modify":"Modify Your Customization",
+    "btn_download":"Download Your PDF",
+    "title_summary":"Summary"
   }
 }

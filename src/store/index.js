@@ -27,6 +27,7 @@ export default new Vuex.Store({
 		],
 		panel_progress: [0, 0, 0, 0],
 		diagram_data: "",
+		diagram_title: "",
 		diagram_width: 0,
 		diagram_height: 0,
 		test:""
@@ -56,6 +57,9 @@ export default new Vuex.Store({
 		storeDiagramSize(state, data){
 			Vue.set(state, 'diagram_height', data.height);
 			Vue.set(state, 'diagram_width', data.width);
+		},
+		storeDiagramTitle(state, data){
+			Vue.set(state, 'diagram_title', data);
 		}
 	},
 	actions: {},

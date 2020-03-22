@@ -1,7 +1,8 @@
 <template>
   <v-container fluid style="padding:0; margin:0">
-    <v-parallax 
-      style="background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); height: 90vh; min-height:600px">
+    <v-parallax
+      
+      style="background: linear-gradient(to right bottom, rgba(240,243,189,1) 0%, rgba(0,168,150,1) 49%, rgba(5,102,141,1) 100%);height: 90vh; min-height:600px"><!--background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12)-->
           <v-row
             align="center"
             justify="center"
@@ -17,74 +18,28 @@
         </v-row>
     </v-parallax>
 
-    <v-container fluid>
-      <v-row>
-        <v-col cols="12">
-          <v-row
-            align="center"
-            justify="center"
-            class="lighten-5"
-            style="height: 300px;"
-          >
-            <div
-              class="mx-12"
-              max-width="344"
-              outlined
-            >
-              <v-list-item three-line>
-                <v-list-item-content>
-                  <div class="overline mb-4">OVERLINE</div>
-                  <v-list-item-title class="headline mb-1">Headline 5</v-list-item-title>
-                  <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-                </v-list-item-content>
-
-                <v-list-item-avatar
-                  tile
-                  size="80"
-                  color="grey"
-                ></v-list-item-avatar>
-              </v-list-item>
-
-              <v-card-actions>
-                <v-btn text>Button</v-btn>
-                <v-btn text>Button</v-btn>
-              </v-card-actions>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-lg-5 col-md-4 p-md-4 col-3"> 
+              <img class="img-fluid" align="right" src="tree.PNG" style="width:25vw; border:5px" alt="PDF Template" > 
             </div>
-            <div
-              class="mx-12"
-              max-width="344"
-              outlined
-            >
-              <v-list-item three-line>
-                <v-list-item-content>
-                  <div class="overline mb-4">OVERLINE</div>
-                  <v-list-item-title class="headline mb-1">Headline 5</v-list-item-title>
-                  <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-                </v-list-item-content>
-
-                <v-list-item-avatar
-                  tile
-                  size="80"
-                  color="grey"
-                ></v-list-item-avatar>
-              </v-list-item>
-
-              <v-card-actions>
-                <v-btn text>Button</v-btn>
-                <v-btn text>Button</v-btn>
-              </v-card-actions>
+            <div class="col-md-6 offset-lg-1 d-flex flex-column justify-content-center py-4">
+              <h2 class="my-3"> <b>Customize your own research plan</b> </h2>
+              <p class="lead">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.</p>
             </div>
-          </v-row>
-        </v-col>
-      </v-row>
-    </v-container>
+          </div>
+        </div>
+      </div>
+    </div>
     <v-footer
       padless
     >
       <v-card
         flat
         tile
-        color="dimgray"
+        color="footer"
         class="lighten-1 white--text text-center"
       >
         <v-card-text>

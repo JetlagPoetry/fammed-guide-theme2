@@ -75,7 +75,7 @@ export default {
             { maxSize: new go.Size(600, Infinity), },
 
             $(go.Panel, "Horizontal",
-              { maxSize: new go.Size(600, Infinity), padding: 12},
+              { maxSize: new go.Size(600, Infinity), padding: 12, alignment: go.Spot.LeftCenter},
               $(go.Picture, 
                 { source: "selected.png", width: 20, height: 20},
                 new go.Binding("visible", "", function(data){ return data.selected&&!data.isParent;})
@@ -134,12 +134,14 @@ export default {
     },
 
     ...mapMutations([
-      'storeDiagramSize'
+      'storeDiagramSize',
+      'storeDiagramTitle'
     ]),
     loadDiagramProperties: function(e) {
       var dia = e.diagram;
       dia.div.style.height = (dia.documentBounds.height+24) + "px";
       this.storeDiagramSize({height: dia.documentBounds.height+24, width: dia.documentBounds.width});
+      this.storeDiagramTitle(this.$t('home.text_title'));
     }
 
     
