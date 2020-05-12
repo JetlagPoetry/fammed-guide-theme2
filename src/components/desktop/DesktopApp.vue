@@ -13,7 +13,7 @@
           class="shrink mt-1 hidden-sm-and-down mx-12"
           contain
           min-width="100"
-          src="./assets/my_logo.png"
+          src="../../assets/my_logo.png"
           width="160"
           position="center"
         />
@@ -65,7 +65,7 @@
 <script>
 
 export default {
-  name: 'App',
+  name: 'DesktopApp',
 
   components: {
   },
@@ -98,7 +98,7 @@ export default {
       onScroll(e) {
         if (typeof window === 'undefined') return;
         const top = window.pageYOffset ||   e.target.scrollTop || 0;
-        this.fab = top > 20;
+        this.fab = top > 70;
       },
       toTop() {
         this.$vuetify.goTo(0);

@@ -72,7 +72,7 @@
 <script>
 import { mapState, mapMutations} from 'vuex'
 export default {
-  name: 'App',
+  name: 'Panel4',
 
   components: {
   },
@@ -139,4 +139,4 @@ export default {
 };
 </script>
 
-<style scoped src="../css/mycss.css"/>
+<style scoped src="../../css/mycss.css"/>

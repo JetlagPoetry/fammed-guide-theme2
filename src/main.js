@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './router/routes'
-import App from './App.vue'
+import DesktopApp from './components/desktop/DesktopApp.vue'
+import MobileApp from './components/mobile/MobileApp.vue'
 import vuetify from './plugins/vuetify';
 import i18n from './i18n'
 import store from './store'
@@ -26,5 +27,12 @@ new Vue({
   vuetify,
   i18n,
   store,
-  render: h => h(App)
+  // render: h => h(App)
+  render: function(h) {
+    if (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)){
+      return h(MobileApp);
+    } else {
+      return h(DesktopApp);
+    }
+  }
 }).$mount('#app');
