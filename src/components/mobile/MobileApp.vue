@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-app id="app">
     <v-app-bar
       app
       color="primary"
@@ -10,7 +10,7 @@
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down mx-12"
+          class="shrink mt-1 mx-12"
           contain
           min-width="100"
           src="../../assets/my_logo.png"
@@ -41,11 +41,11 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item>
+          <v-list-item @click="toList1()">
             <v-list-item-title>Chapter1</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item @click="toList2()">
             <v-list-item-title>Chapter2</v-list-item-title>
           </v-list-item>
 
@@ -59,13 +59,10 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <v-content>
-          <div>adasdfasdfsdfadasdfasdfsdfadasdfasdfsdfadasdfasdfsdf</div>
-      <v-card-text>
-        The navigation drawer will appear from the bottom on smaller size screens.
-      </v-card-text>
+    <v-content class="mx-4">
+      <router-view></router-view>
     </v-content>
-  </v-container>
+  </v-app>
 </template>
 <script>
 export default {
@@ -86,6 +83,17 @@ export default {
   },
 
   methods: {
+    mounted:function(){
+      this.$router.push('/list1');
+    },
+    toList1 () {
+      this.$router.push('/list1');
+    },
+
+    toList2 () {
+      this.$router.push('/list2');
+    },
+      
     changeLanguage(){
       if(this.$i18n.locale==='fr'){
         this.$i18n.locale='en';
@@ -97,3 +105,5 @@ export default {
   }
 };
 </script>
+
+<style src="../../css/mycss.css"/>

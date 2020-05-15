@@ -22,7 +22,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn
+        <v-btn
           @click="toHomePage"
           text
           color="secondary"
